@@ -1,0 +1,238 @@
+/* ===== Lasya website UI kit — page styles, motion, ambience ===== */
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{
+  background:var(--ink-900);
+  color:var(--fg-1);
+  font-family:var(--font-sans);
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font-family:inherit}
+
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+.section{position:relative;padding:120px 0}
+
+/* responsive grids (classes so media queries can override) */
+.hero-grid{max-width:1280px;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:stretch}
+.split-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+@media (max-width:1000px){
+  .hero-grid{grid-template-columns:1fr}
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:720px){
+  .split-grid{grid-template-columns:1fr}
+  .grid-3{grid-template-columns:1fr}
+  .grid-4{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr}
+}
+
+/* ---- shared atoms ---- */
+.eyebrow{
+  font-family:var(--font-label);text-transform:uppercase;
+  letter-spacing:.32em;font-size:14px;color:var(--gold-500);
+  display:inline-flex;align-items:center;gap:14px;
+}
+.eyebrow::before{content:"";width:30px;height:1px;background:var(--gold-500);opacity:.7}
+
+.btn{
+  font-family:var(--font-sans);font-weight:500;font-size:15px;letter-spacing:.01em;
+  border-radius:999px;padding:14px 28px;border:1px solid transparent;cursor:pointer;
+  display:inline-flex;align-items:center;gap:9px;white-space:nowrap;
+  transition:transform var(--dur-fast) var(--ease-soft),box-shadow var(--dur-med) var(--ease-soft),background var(--dur-fast);
+}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:linear-gradient(180deg,var(--gold-400),var(--gold-500));color:var(--fg-on-gold)}
+.btn-primary:hover{box-shadow:var(--glow-gold)}
+.btn-secondary{background:transparent;color:var(--fg-1);border-color:rgba(236,203,121,.5)}
+.btn-secondary:hover{background:var(--surface-1);border-color:var(--gold-400)}
+.btn-ghost{background:var(--surface-1);color:var(--fg-1)}
+.btn-ghost:hover{background:var(--surface-2)}
+
+/* ---- scroll reveal ----
+   Resting state is VISIBLE. Entrance is played via the Web Animations API
+   (fill:none) so content is never stuck-hidden if the animation is paused. */
+.reveal{} /* marker only */
+
+/* ---- ambience: gold particles + feather trail ---- */
+.particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.particle{position:absolute;border-radius:50%;background:radial-gradient(circle,var(--gold-300),transparent 70%);opacity:.0;animation:drift linear infinite}
+@keyframes drift{
+  0%{transform:translateY(20px);opacity:0}
+  15%{opacity:.7}
+  85%{opacity:.5}
+  100%{transform:translateY(-120px);opacity:0}
+}
+.feather-trail{
+  position:absolute;border-radius:50%;
+  background:var(--grad-peacock);
+  filter:blur(70px);opacity:.22;pointer-events:none;z-index:0;
+}
+
+/* cursor feather dot */
+.cursor-eye{
+  position:fixed;width:10px;height:10px;border-radius:50%;
+  background:radial-gradient(circle,var(--gold-300),var(--teal-500) 60%,transparent);
+  pointer-events:none;z-index:90;mix-blend-mode:screen;
+  transform:translate(-50%,-50%);transition:opacity .3s;opacity:0;
+}
+
+/* card hover */
+.lift{transition:transform var(--dur-med) var(--ease-stage),box-shadow var(--dur-med) var(--ease-stage),border-color var(--dur-med)}
+.lift:hover{transform:translateY(-6px);box-shadow:var(--glow-gold);border-color:rgba(236,203,121,.4)}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:80;transition:background var(--dur-med),backdrop-filter var(--dur-med),border-color var(--dur-med)}
+.nav.scrolled{background:rgba(8,9,13,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--hairline)}
+.nav-link{font-size:15px;color:var(--fg-2);transition:color var(--dur-fast)}
+.nav-link:hover{color:var(--gold-400)}
+
+/* gallery horizontal scroll */
+.h-scroll{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 32px 24px;scrollbar-width:thin;scrollbar-color:var(--gold-600) transparent}
+.h-scroll::-webkit-scrollbar{height:8px}
+.h-scroll::-webkit-scrollbar-thumb{background:var(--gold-600);border-radius:999px}
+.h-scroll>*{scroll-snap-align:center;flex:0 0 auto}
+
+image-slot{--placeholder-color:var(--fg-3)}
+
+.lic svg{display:block;width:100%;height:100%;stroke-width:inherit}
+
+/* ============================================================
+   MOTION ART — flowing liquid-gradient field (animated blurred blobs)
+   GPU-cheap: transforms only. Reduced-motion → static gradient.
+   ============================================================ */
+.motion-art{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.motion-art .ma-inner{position:absolute;inset:-12%;filter:blur(64px) saturate(1.15)}
+.ma-blob{position:absolute;border-radius:50%;mix-blend-mode:screen;will-change:transform;opacity:.55}
+@keyframes maA{0%{transform:translate(0,0) scale(1)}50%{transform:translate(14%,-10%) scale(1.28)}100%{transform:translate(-8%,12%) scale(.92)}}
+@keyframes maB{0%{transform:translate(0,0) scale(1.1)}50%{transform:translate(-16%,8%) scale(.9)}100%{transform:translate(10%,-12%) scale(1.2)}}
+@keyframes maC{0%{transform:translate(-6%,6%) scale(.95)}50%{transform:translate(12%,12%) scale(1.22)}100%{transform:translate(-4%,-10%) scale(1)}}
+@keyframes maD{0%{transform:translate(8%,-6%) scale(1.05)}50%{transform:translate(-12%,-12%) scale(1.3)}100%{transform:translate(6%,10%) scale(.95)}}
+.ma-a{animation:maA 19s var(--ease-soft) infinite alternate}
+.ma-b{animation:maB 24s var(--ease-soft) infinite alternate}
+.ma-c{animation:maC 21s var(--ease-soft) infinite alternate}
+.ma-d{animation:maD 27s var(--ease-soft) infinite alternate}
+@media (prefers-reduced-motion: reduce){
+  .ma-blob{animation:none!important}
+}
+
+/* ============================================================
+   BACKGROUND MOOD SYSTEM  (set via html[data-mood])
+   "midnight" = all dark (default).  "jewel" = dark base with deep
+   peacock/royal/magenta section washes.  "vibrant" = stronger.
+   Color is treated as STAGE LIGHTING on a dark stage, not flat fill.
+   ============================================================ */
+#programs, #instructor { background: var(--grad-stage); transition: background 600ms var(--ease-soft); }
+.section, header#top { transition: background 600ms var(--ease-soft); }
+
+/* ---- JEWEL ---- */
+html[data-mood="jewel"] header#top{
+  background:
+    radial-gradient(70% 60% at 88% 12%, rgba(196,46,132,.16), transparent 60%),
+    radial-gradient(60% 55% at 8% 90%, rgba(44,75,212,.18), transparent 60%);
+}
+html[data-mood="jewel"] #about{
+  background: radial-gradient(90% 80% at 0% 25%, rgba(44,75,212,.14), transparent 58%), var(--ink-900);
+}
+html[data-mood="jewel"] #programs{
+  background:
+    radial-gradient(130% 95% at 50% 0%, rgba(15,166,160,.20), transparent 58%),
+    radial-gradient(90% 80% at 100% 100%, rgba(20,148,106,.14), transparent 60%),
+    var(--ink-900);
+}
+html[data-mood="jewel"] .sec-why{
+  background: radial-gradient(120% 90% at 50% 100%, rgba(216,178,90,.07), transparent 60%), var(--ink-900);
+}
+html[data-mood="jewel"] #instructor{
+  background:
+    radial-gradient(120% 110% at 78% 12%, rgba(44,75,212,.26), transparent 60%),
+    radial-gradient(90% 90% at 0% 100%, rgba(124,90,224,.16), transparent 60%),
+    var(--ink-900);
+}
+html[data-mood="jewel"] .sec-testimonials{
+  background:
+    radial-gradient(120% 100% at 18% 0%, rgba(196,46,132,.20), transparent 60%),
+    radial-gradient(90% 90% at 100% 100%, rgba(44,75,212,.12), transparent 60%),
+    var(--ink-900);
+}
+html[data-mood="jewel"] #contact{
+  background:
+    radial-gradient(100% 120% at 50% 50%, rgba(15,166,160,.16), transparent 55%),
+    radial-gradient(120% 120% at 85% 10%, rgba(196,46,132,.16), transparent 60%),
+    radial-gradient(120% 120% at 12% 90%, rgba(44,75,212,.16), transparent 60%),
+    var(--ink-900);
+}
+
+/* ---- VIBRANT (same zones, hotter + more lit) ---- */
+html[data-mood="vibrant"] header#top{
+  background:
+    radial-gradient(75% 65% at 90% 8%, rgba(196,46,132,.12), transparent 60%),
+    radial-gradient(70% 60% at 6% 92%, rgba(44,75,212,.12), transparent 60%);
+}
+html[data-mood="vibrant"] #about{
+  background:
+    radial-gradient(110% 95% at 0% 25%, rgba(44,75,212,.34), transparent 60%),
+    radial-gradient(90% 80% at 100% 90%, rgba(196,46,132,.24), transparent 62%),
+    var(--ink-900);
+}
+html[data-mood="vibrant"] #programs{
+  background:
+    radial-gradient(130% 100% at 50% 0%, rgba(15,166,160,.42), transparent 60%),
+    radial-gradient(100% 95% at 100% 100%, rgba(20,148,106,.32), transparent 64%),
+    radial-gradient(90% 90% at 0% 80%, rgba(44,75,212,.18), transparent 62%),
+    var(--ink-900);
+}
+html[data-mood="vibrant"] .sec-why{
+  background:
+    radial-gradient(110% 95% at 100% 0%, rgba(196,46,132,.30), transparent 60%),
+    radial-gradient(100% 90% at 0% 100%, rgba(124,90,224,.26), transparent 62%),
+    radial-gradient(80% 70% at 50% 50%, rgba(216,178,90,.10), transparent 60%),
+    var(--ink-900);
+}
+html[data-mood="vibrant"] #gallery{
+  background:
+    radial-gradient(90% 80% at 100% 0%, rgba(15,166,160,.30), transparent 60%),
+    radial-gradient(90% 80% at 0% 100%, rgba(196,46,132,.26), transparent 62%),
+    radial-gradient(80% 70% at 50% 50%, rgba(44,75,212,.16), transparent 60%),
+    var(--ink-900);
+}
+html[data-mood="vibrant"] #instructor{
+  background:
+    radial-gradient(120% 110% at 78% 12%, rgba(44,75,212,.48), transparent 62%),
+    radial-gradient(100% 100% at 0% 100%, rgba(124,90,224,.36), transparent 64%),
+    var(--ink-900);
+}
+html[data-mood="vibrant"] .sec-testimonials{
+  background:
+    radial-gradient(120% 100% at 18% 0%, rgba(196,46,132,.42), transparent 62%),
+    radial-gradient(100% 100% at 100% 100%, rgba(44,75,212,.30), transparent 64%),
+    var(--ink-900);
+}
+html[data-mood="vibrant"] #contact{
+  background:
+    radial-gradient(100% 120% at 50% 40%, rgba(15,166,160,.34), transparent 58%),
+    radial-gradient(120% 120% at 85% 10%, rgba(196,46,132,.40), transparent 62%),
+    radial-gradient(120% 120% at 12% 95%, rgba(44,75,212,.34), transparent 62%),
+    var(--ink-900);
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  .particle,.feather-trail{animation:none}
+  .cursor-eye{display:none}
+}
+@media (max-width:1000px){
+  .hero-aside{display:none!important}
+}
+@media (max-width:760px){
+  .section{padding:80px 0}
+  .wrap{padding:0 22px}
+  .hide-sm{display:none!important}
+}

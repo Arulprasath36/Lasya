@@ -1,0 +1,25 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@300;400;500;600;700&family=Marcellus&display=swap" rel="stylesheet"><script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script><link rel="stylesheet" href="../colors_and_type.css"><style>
+*{box-sizing:border-box;margin:0}
+html,body{background:var(--ink-900);color:var(--fg-1);font-family:var(--font-sans)}
+.card{width:700px;padding:26px 30px;background:var(--grad-stage)}
+.row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.lbl{font-family:var(--font-label);text-transform:uppercase;letter-spacing:.28em;font-size:11px;color:var(--gold-500)}
+.mono{font-size:11px;color:var(--fg-3)}
+.btn{font-family:var(--font-sans);font-weight:500;font-size:15px;border-radius:999px;padding:13px 26px;border:1px solid transparent;cursor:pointer;display:inline-flex;align-items:center;gap:9px;letter-spacing:.01em}
+.btn-primary{background:linear-gradient(180deg,#ECCB79,#D8B25A);color:#1A1407}
+.btn-secondary{background:transparent;color:#F5EFE1;border-color:rgba(236,203,121,.5)}
+.btn-ghost{background:var(--surface-1);color:#F5EFE1}
+.chip{font-family:var(--font-sans);font-size:13px;padding:8px 16px;border-radius:999px;border:1px solid var(--hairline);color:#C3BDAE;display:inline-flex;align-items:center;gap:7px}
+.ic{display:inline-flex;align-items:center;justify-content:center}
+.ic svg{width:1em;height:1em;stroke-width:1.6}
+</style></head><body><div class="card">
+<div class="lbl" style="margin-bottom:14px">Buttons</div>
+<div class="row">
+  <button class="btn btn-primary"><span class="ic" style="font-size:18px"><i data-lucide="sparkles"></i></span> Join a Class</button>
+  <button class="btn btn-secondary">View Programs</button>
+  <button class="btn btn-ghost"><span class="ic" style="font-size:18px"><i data-lucide="phone-call"></i></span> Contact Us</button>
+</div>
+<div class="row" style="margin-top:14px">
+  <button class="btn btn-primary" style="padding:9px 18px;font-size:13px">Register Now</button>
+  <span class="mono">Pill buttons · gold gradient primary · gold-hairline secondary · glass ghost</span>
+</div></div><script>lucide.createIcons();</script></body></html>

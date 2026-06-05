@@ -1,0 +1,208 @@
+/* ============================================================
+   LASYA — Bollywood Dance School
+   Foundational tokens: color + type
+   "Where rhythm becomes expression."
+   ============================================================ */
+
+/* ---- Fonts (Google Fonts — see README for substitution note) ----
+   Logo    : Cormorant Garamond SemiBold Italic (wordmark)
+   Display : Cormorant Garamond  (high-contrast elegant serif — headings)
+   Label   : Marcellus           (refined roman caps, used for eyebrows)
+   Sans    : Manrope             (clean modern sans — body + UI)
+   Import in HTML:
+   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@300;400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
+*/
+
+:root {
+  /* ---------- CORE INK / SURFACES ---------- */
+  --ink-900: #07080D;   /* deepest black-navy — page base */
+  --ink-800: #0B0F1E;   /* deep navy */
+  --ink-700: #101728;   /* raised navy */
+  --ink-600: #18203A;   /* elevated surface */
+  --ink-500: #232C49;   /* hairline / border base */
+
+  --surface-1: rgba(255, 255, 255, 0.035); /* glass card */
+  --surface-2: rgba(255, 255, 255, 0.06);  /* hover glass */
+  --hairline:  rgba(236, 203, 121, 0.16);  /* gold-tinted divider */
+  --hairline-cool: rgba(255, 255, 255, 0.10);
+
+  /* ---------- PEACOCK JEWEL PALETTE ---------- */
+  --gold-300: #F3DDA1;
+  --gold-400: #ECCB79;  /* bright gold — highlights, particles */
+  --gold-500: #D8B25A;  /* PRIMARY accent gold */
+  --gold-600: #B8923F;  /* pressed gold */
+
+  --teal-400: #2DC2BA;
+  --teal-500: #0FA6A0;  /* peacock teal */
+  --teal-600: #0A7E7A;
+
+  --emerald-400: #2BB57E;
+  --emerald-500: #14946A; /* emerald */
+  --emerald-600: #0D6E4F;
+
+  --royal-400: #4A66E0;
+  --royal-500: #2C4BD4;  /* royal blue */
+  --royal-600: #1E36A6;
+
+  --magenta-400: #DB4C9C;
+  --magenta-500: #C42E84; /* magenta */
+  --magenta-600: #9C1F66;
+
+  /* ---------- FOREGROUND (warm ivory on ink) ---------- */
+  --fg-1: #F5EFE1;  /* primary text — warm ivory */
+  --fg-2: #C3BDAE;  /* secondary text */
+  --fg-3: #8C8779;  /* muted / captions */
+  --fg-on-gold: #1A1407; /* text on gold fills */
+
+  /* ---------- SEMANTIC ---------- */
+  --bg: var(--ink-900);
+  --bg-elev: var(--ink-700);
+  --accent: var(--gold-500);
+  --accent-bright: var(--gold-400);
+  --link: var(--gold-400);
+  --focus-ring: rgba(236, 203, 121, 0.55);
+
+  /* Peacock gradient — used for feather trails / accents */
+  --grad-peacock: linear-gradient(120deg, var(--teal-500) 0%, var(--emerald-500) 28%, var(--royal-500) 60%, var(--magenta-500) 100%);
+  --grad-gold: linear-gradient(180deg, var(--gold-400) 0%, var(--gold-600) 100%);
+  --grad-stage: radial-gradient(120% 120% at 50% -10%, #16203c 0%, var(--ink-900) 60%);
+
+  /* ---------- RADII ---------- */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 22px;
+  --r-xl: 34px;
+  --r-pill: 999px;
+
+  /* ---------- SHADOWS / GLOW ---------- */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.5);
+  --shadow-md: 0 12px 30px -12px rgba(0,0,0,0.7);
+  --shadow-lg: 0 40px 80px -30px rgba(0,0,0,0.85);
+  --glow-gold: 0 0 0 1px rgba(236,203,121,0.18), 0 18px 50px -18px rgba(216,178,90,0.45);
+  --glow-teal: 0 18px 50px -20px rgba(15,166,160,0.5);
+
+  /* ---------- SPACING (4px base) ---------- */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+  --s-10: 128px;
+
+  /* ---------- MOTION ---------- */
+  --ease-stage: cubic-bezier(0.16, 1, 0.3, 1);   /* curtain / reveal */
+  --ease-soft:  cubic-bezier(0.33, 0, 0.2, 1);
+  --dur-fast: 180ms;
+  --dur-med: 420ms;
+  --dur-slow: 900ms;
+
+  /* ---------- TYPE FAMILIES ---------- */
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-label: "Marcellus", "Cormorant Garamond", serif;
+  --font-sans: "Manrope", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ============================================================
+   TYPE SCALE — semantic helpers
+   Display is fluid; body is steady.
+   ============================================================ */
+
+.t-hero {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(64px, 9vw, 148px);
+  line-height: 0.96;
+  letter-spacing: -0.015em;
+  color: var(--fg-1);
+}
+
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(40px, 5.5vw, 84px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+}
+
+.t-h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(34px, 4vw, 56px);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+}
+
+.t-h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(26px, 3vw, 38px);
+  line-height: 1.12;
+  color: var(--fg-1);
+}
+
+.t-h3 {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.25;
+  letter-spacing: 0.005em;
+  color: var(--fg-1);
+}
+
+/* Eyebrow / label — Marcellus, tracked caps with a gold tint */
+.t-eyebrow {
+  font-family: var(--font-label);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold-500);
+}
+
+.t-lead {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.55;
+  color: var(--fg-2);
+}
+
+.t-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--fg-2);
+}
+
+.t-small {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--fg-3);
+}
+
+.t-mono {
+  font-family: "Manrope", ui-monospace, monospace;
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--fg-3);
+}
+
+/* Optional: gold gradient text for the wordmark / emphasis */
+.t-gold-grad {
+  background: linear-gradient(180deg, var(--gold-300), var(--gold-500) 70%, var(--gold-600));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
