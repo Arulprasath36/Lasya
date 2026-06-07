@@ -3,14 +3,10 @@
 function About() {
   return (
     <section id="about" className="section">
-      <div className="wrap split-grid">
+      <div className="wrap split-grid about-grid">
         <div className="reveal" style={{ position: 'relative' }}>
-          <div style={{ width: '100%', height: 460, borderRadius: 24, overflow: 'hidden' }}>
-            <Photo src="assets/photos/girl-blue-smile-web.jpg" alt="Young dancer smiling on stage in a blue lehenga" radius={24} pos="center 25%" />
-          </div>
-          <div style={{ position: 'absolute', right: -22, bottom: -22, width: 150, height: 150, borderRadius: 20, background: 'rgba(8,9,13,.7)', border: '1px solid var(--hairline)', backdropFilter: 'blur(10px)', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 18 }}>
-            <span style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 22, color: 'var(--gold-400)', lineHeight: 1.1 }}>Lásya</span>
-            <span style={{ fontSize: 12.5, color: 'var(--fg-3)', marginTop: 6, lineHeight: 1.4 }}>the dance of grace &amp; expression</span>
+          <div className="about-photo">
+            <Photo src="assets/photos/lasya-group-photo.jpg" alt="Lasya students and instructor together on stage" radius={24} pos="center center" />
           </div>
         </div>
         <div>
@@ -21,13 +17,8 @@ function About() {
           <p className="reveal reveal-d2" style={{ fontSize: 18, lineHeight: 1.7, color: 'var(--fg-2)', marginTop: 22, maxWidth: 520 }}>
             At Lasya, every class is a stage. We blend the joy of Bollywood with real technique — building confidence, fitness, cultural connection, and the kind of stage presence that stays with you long after the music stops.
           </p>
-          <div className="reveal reveal-d3" style={{ display: 'flex', gap: 28, marginTop: 30 }}>
-            {[['hand-heart', 'Confidence'], ['globe', 'Culture'], ['dumbbell', 'Fitness'], ['star', 'Stage presence']].map(([ic, t]) => (
-              <div key={t} style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <Icon name={ic} size={26} color="var(--gold-500)" strokeWidth={1.5} />
-                <span style={{ fontSize: 14, color: 'var(--fg-2)' }}>{t}</span>
-              </div>
-            ))}
+          <div className="reveal reveal-d2" style={{ marginTop: 26 }}>
+            <a href="about.html"><Button variant="secondary" icon="arrow-right">Read more about us</Button></a>
           </div>
         </div>
       </div>

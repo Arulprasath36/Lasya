@@ -1,16 +1,58 @@
 /* Gallery (horizontal scroll) · Instructor · Testimonials */
 
 const galleryItems = [
-  { src: 'girl-checkered', w: 440, label: 'Attitude' },
-  { src: 'boy-yellow-point', w: 440, label: 'Full Energy' },
-  { src: 'silhouette-moon', w: 440, label: 'Moonlight', pos: 'center 28%' },
-  { src: 'girl-blue-smile', w: 440, label: 'Pure Joy', pos: 'center 20%' },
-  { src: 'boy-white-shirt', w: 440, label: 'Showstoppers' },
+  { src: 'girl-checkered-web.jpg', w: 440, label: 'Attitude' },
+  { src: 'boy-yellow-point-web.jpg', w: 440, label: 'Full Energy' },
+  { src: 'silhouette-moon-web.jpg', w: 440, label: 'Moonlight', pos: 'center 28%' },
+  { src: 'girl-blue-smile-web.jpg', w: 440, label: 'Pure Joy', pos: 'center 20%' },
+  { src: 'boy-white-shirt-web.jpg', w: 440, label: 'Showstoppers' },
+  { src: 'ANU07538.jpg', w: 440, label: 'On Stage' },
+  { src: 'DSC_2004-2.jpg', w: 440, label: 'Spotlight' },
+  { src: 'ANU05856.jpg', w: 440, label: 'Performance' },
+  { src: 'ANU06835.jpg', w: 440, label: 'In the Moment' },
+  { src: 'ANU07161.jpg', w: 440, label: 'Stage Presence' },
+  { src: 'DSC_3043.jpg', w: 440, label: 'The Ensemble' },
 ];
 
 function Gallery() {
   const ref = useRef(null);
-  const nudge = (dir) => ref.current?.scrollBy({ left: dir * 620, behavior: 'smooth' });
+  const pausedRef = useRef(false);
+  const nudge = (dir) => {
+    const el = ref.current;
+    if (!el) return;
+    pausedRef.current = true;
+    el.classList.add('snapping');
+    el.scrollBy({ left: dir * 620, behavior: 'smooth' });
+    setTimeout(() => { el.classList.remove('snapping'); pausedRef.current = false; }, 2000);
+  };
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let raf;
+    const step = () => {
+      if (!pausedRef.current && el.scrollWidth > el.clientWidth) {
+        el.scrollLeft += 0.7;
+        if (el.scrollLeft >= el.scrollWidth / 2) el.scrollLeft -= el.scrollWidth / 2;
+      }
+      raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    const pause = () => { pausedRef.current = true; };
+    const resume = () => { pausedRef.current = false; };
+    el.addEventListener('mouseenter', pause);
+    el.addEventListener('mouseleave', resume);
+    el.addEventListener('touchstart', pause, { passive: true });
+    el.addEventListener('touchend', resume);
+    return () => {
+      cancelAnimationFrame(raf);
+      el.removeEventListener('mouseenter', pause);
+      el.removeEventListener('mouseleave', resume);
+      el.removeEventListener('touchstart', pause);
+      el.removeEventListener('touchend', resume);
+    };
+  }, []);
+
   return (
     <section id="gallery" className="section" style={{ paddingLeft: 0, paddingRight: 0 }}>
       <div className="wrap" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 44, gap: 24 }}>
@@ -24,9 +66,9 @@ function Gallery() {
         </div>
       </div>
       <div className="h-scroll reveal" ref={ref}>
-        {galleryItems.map((g) => (
-          <div key={g.src} style={{ position: 'relative', width: g.w, height: 640, borderRadius: 22, overflow: 'hidden' }}>
-            <Photo src={`assets/photos/${g.src}-web.jpg`} alt={g.label} radius={22} pos={g.pos || 'center'} />
+        {[...galleryItems, ...galleryItems].map((g, i) => (
+          <div key={`${g.src}-${i}`} style={{ position: 'relative', width: g.w, height: 640, borderRadius: 22, overflow: 'hidden' }}>
+            <Photo src={`assets/photos/${g.src}`} alt={g.label} radius={22} pos={g.pos || 'center'} />
             <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: '60px 24px 22px', background: 'linear-gradient(to top, rgba(7,8,13,.9), transparent)', pointerEvents: 'none' }}>
               <span style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 30, color: 'var(--fg-1)' }}>{g.label}</span>
             </div>
@@ -41,9 +83,8 @@ function Instructor() {
   return (
     <section id="instructor" className="section">
       <div className="wrap split-grid">
-        <div className="reveal" style={{ position: 'relative' }}>
-          <div style={{ position: 'absolute', inset: -16, borderRadius: 'var(--r-xl)', background: 'var(--grad-peacock)', filter: 'blur(40px)', opacity: .3 }} />
-          <image-slot id="lasya-founder" style={{ position: 'relative', width: '100%', height: 500, display: 'block' }} shape="rounded" radius="26" placeholder="Drop the founder's portrait"></image-slot>
+        <div className="reveal">
+          <img src="assets/photos/ANU08358.jpg" alt="Mathumitha Balu — founder and instructor" style={{ width: '100%', height: 'auto', display: 'block' }} />
         </div>
         <div>
           <div className="reveal"><Eyebrow>Your Instructor</Eyebrow></div>
@@ -54,7 +95,7 @@ function Instructor() {
             "I started Lasya to share the dance I grew up loving — the music, the colour, the feeling. Every student who walks in nervous and walks out beaming is why we do this."
           </p>
           <div className="reveal reveal-d3" style={{ marginTop: 24 }}>
-            <div style={{ fontFamily: 'var(--font-display)', fontSize: 26 }}>Meera Nair</div>
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: 26 }}>Mathumitha Balu</div>
             <div style={{ fontSize: 14, color: 'var(--gold-400)', fontFamily: 'var(--font-label)', letterSpacing: '.16em', textTransform: 'uppercase', marginTop: 4 }}>Founder &amp; Lead Choreographer</div>
           </div>
         </div>

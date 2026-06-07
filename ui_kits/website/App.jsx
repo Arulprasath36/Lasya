@@ -35,6 +35,7 @@ function App() {
       </main>
       <Footer />
       <RegisterModal open={modal} onClose={() => setModal(false)} />
+      <FAQChat />
 
       <TweaksPanel>
         <TweakSection label="Background mood" />

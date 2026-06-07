@@ -31,8 +31,14 @@ function Hero({ onJoin, slideshow = true }) {
       <div className="wrap hero-grid" style={{ position: 'relative', zIndex: 2 }}>
         <div>
           <div className="reveal in"><Eyebrow>Bollywood Dance School</Eyebrow></div>
-          <h1 className="reveal reveal-d1" style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: 'clamp(46px,5.4vw,102px)', lineHeight: 1.04, letterSpacing: '-.015em', marginTop: 22 }}>
-            Dance Bollywood.<br />Feel the Rhythm.<br /><span style={{ fontStyle: 'italic', color: 'var(--gold-400)' }}>Own the Stage.</span>
+          <h1 className="reveal reveal-d1" style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: 'clamp(46px,4.2vw,76px)', lineHeight: 1.04, letterSpacing: '-.015em', marginTop: 22 }}>
+            <span style={{ display: 'block', whiteSpace: 'nowrap' }}>
+              Move with <span style={{ color: 'var(--teal-400)' }}>Grace</span>
+            </span>
+            <span style={{ display: 'block', whiteSpace: 'nowrap' }}>
+              Dance with <span style={{ color: 'var(--magenta-500)' }}>Passion</span>
+            </span>
+            <span style={{ display: 'block', whiteSpace: 'nowrap', fontStyle: 'italic', color: 'var(--gold-400)', marginTop: 8 }}>Own the Stage.</span>
           </h1>
           <p className="reveal reveal-d2" style={{ fontFamily: 'var(--font-sans)', fontWeight: 300, fontSize: 'clamp(18px,1.7vw,22px)', lineHeight: 1.55, color: 'var(--fg-2)', marginTop: 26, maxWidth: 520 }}>
             Lasya is a joyful Bollywood dance school helping kids, teens, and adults build confidence, expression, rhythm, and stage presence.
@@ -40,6 +46,10 @@ function Hero({ onJoin, slideshow = true }) {
           <div className="reveal reveal-d3" style={{ display: 'flex', gap: 14, marginTop: 36, flexWrap: 'wrap' }}>
             <Button onClick={onJoin} icon="sparkles">Join a Class</Button>
             <a href="#programs"><Button variant="secondary">View Programs</Button></a>
+          </div>
+          <div className="reveal reveal-d3" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '10px 14px', borderRadius: 'var(--r-pill)', background: 'rgba(8,9,13,.48)', border: '1px solid var(--hairline)', marginTop: 18 }}>
+            <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--teal-400)', boxShadow: '0 0 10px var(--teal-400)' }} />
+            <span style={{ fontSize: 13, color: 'var(--fg-2)' }}>Now enrolling — Summer batch</span>
           </div>
           <div className="reveal reveal-d4" style={{ display: 'flex', gap: 30, marginTop: 44 }}>
             {[['12+', 'Years teaching'], ['600+', 'Students on stage'], ['4', 'Programs']].map(([n, l]) => (
@@ -55,14 +65,10 @@ function Hero({ onJoin, slideshow = true }) {
         <div className="reveal reveal-d2 hero-aside" style={{ position: 'relative' }}>
           <div style={{ position: 'absolute', inset: -12, borderRadius: 'var(--r-xl)', background: 'var(--grad-peacock)', filter: 'blur(2px)', opacity: .5 }} />
           {slideshow ? <HeroSlideshow /> : (
-            <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: 472, borderRadius: 28, overflow: 'hidden' }}>
+            <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: 480, borderRadius: 28, overflow: 'hidden' }}>
               <Photo src="assets/photos/silhouette-moon-web.jpg" alt="Dancer in silhouette against a glowing moon" radius={28} pos="center 30%" />
             </div>
           )}
-          <div style={{ position: 'absolute', left: 18, bottom: 18, right: 18, display: 'flex', alignItems: 'center', gap: 10, padding: '12px 16px', borderRadius: 'var(--r-pill)', background: 'rgba(8,9,13,.6)', backdropFilter: 'blur(8px)', border: '1px solid var(--hairline)' }}>
-            <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--teal-400)', boxShadow: '0 0 10px var(--teal-400)' }} />
-            <span style={{ fontSize: 13, color: 'var(--fg-2)' }}>Now enrolling — Summer batch</span>
-          </div>
         </div>
       </div>
     </header>
@@ -73,8 +79,10 @@ function Hero({ onJoin, slideshow = true }) {
    Headline/CTA stay fixed; only the image cycles. Reduced-motion → first frame only. */
 const heroShots = [
   { src: 'silhouette-moon', pos: 'center 30%', alt: 'Dancer in silhouette against a glowing moon' },
-  { src: 'boy-yellow-point', pos: 'center 20%', alt: 'Young dancer mid-pose, arm raised' },
-  { src: 'girl-checkered', pos: 'center 18%', alt: 'Dancer in a checkered costume' },
+  { src: 'boy-yellow-point', pos: 'center bottom', alt: 'Young dancer mid-pose, arm raised' },
+  { src: 'girl-checkered', pos: 'center bottom', alt: 'Dancer in a checkered costume' },
+  { src: 'girl-blue-smile', pos: 'center 22%', alt: 'Young dancer smiling on stage in a blue lehenga' },
+  { src: 'boy-white-shirt', pos: 'center bottom', alt: 'Young dancer in a white shirt performing on stage' },
 ];
 
 function HeroSlideshow({ interval = 4200 }) {
@@ -86,7 +94,7 @@ function HeroSlideshow({ interval = 4200 }) {
     return () => clearInterval(id);
   }, [interval, reduce]);
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: 472, borderRadius: 28, overflow: 'hidden', background: 'var(--ink-800)' }}>
+    <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: 480, borderRadius: 28, overflow: 'hidden', background: 'var(--ink-800)' }}>
       {heroShots.map((s, idx) => (
         <img key={s.src} src={`assets/photos/${s.src}-web.jpg`} alt={s.alt} loading={idx === 0 ? 'eager' : 'lazy'}
           style={{

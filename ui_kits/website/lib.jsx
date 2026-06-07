@@ -172,4 +172,56 @@ function MotionArt({ blobs = MA_DEFAULT, opacity = 0.55 }) {
   );
 }
 
-Object.assign(window, { useReveal, useScrolled, Eyebrow, Icon, Button, Particles, CursorEye, Photo, MotionArt });
+/* FAQ chat widget — rule-based, no AI, no tokens */
+const FAQ_ITEMS = [
+  { q: 'What are your class timings?', a: 'Classes run on weekends — Saturday & Sunday. Specific batch timings will be confirmed upon enrollment. Contact us to check current slot availability.' },
+  { q: 'What is the fee?', a: 'Fees vary by program and batch. Please reach out via the contact form or call us directly and we\'ll share the latest pricing for your preferred program.' },
+  { q: 'What age groups do you teach?', a: 'We have programs for everyone — Kids (5–11), Teens (12–17), Adults (all levels), and custom Wedding & Event choreography.' },
+  { q: 'Where are you located?', a: 'Our studio location details will be shared upon enrollment. Use the Contact section to get in touch and we\'ll guide you to us!' },
+  { q: 'How do I enroll?', a: 'Click the "Join a Class" button at the top of the page to fill out our enrollment form. We\'ll get back to you within 24 hours.' },
+  { q: 'What styles do you teach?', a: 'We specialise in Bollywood dance — covering expressions, formations, stage presence, and performance confidence. It\'s high energy and a whole lot of fun!' },
+];
+
+function FAQChat() {
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(null);
+  const panelRef = useRef(null);
+
+  useEffect(() => {
+    if (open && panelRef.current) panelRef.current.scrollTop = 0;
+  }, [open]);
+
+  return (
+    <div className="faq-widget" aria-label="FAQ chat">
+      {open && (
+        <div className="faq-panel" ref={panelRef} role="dialog" aria-modal="true" aria-label="Frequently asked questions">
+          <div className="faq-header">
+            <div>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: 18, color: 'var(--fg-1)' }}>Ask Lasya</div>
+              <div style={{ fontSize: 12, color: 'var(--fg-3)', marginTop: 2 }}>Pick a question below</div>
+            </div>
+            <button className="faq-close" onClick={() => { setOpen(false); setActive(null); }} aria-label="Close">
+              <Icon name="x" size={16} />
+            </button>
+          </div>
+          <div className="faq-body">
+            <div className="faq-bot-bubble">Hi! I'm here to help. What would you like to know about Lasya? 👋</div>
+            {FAQ_ITEMS.map((item, i) => (
+              <div key={i} className="faq-item">
+                <button className={`faq-q${active === i ? ' active' : ''}`} onClick={() => setActive(active === i ? null : i)}>
+                  {item.q}
+                </button>
+                {active === i && <div className="faq-a">{item.a}</div>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      <button className="faq-trigger" onClick={() => setOpen(o => !o)} aria-label={open ? 'Close chat' : 'Open FAQ chat'}>
+        <Icon name={open ? 'x' : 'message-circle'} size={22} />
+      </button>
+    </div>
+  );
+}
+
+Object.assign(window, { useReveal, useScrolled, Eyebrow, Icon, Button, Particles, CursorEye, Photo, MotionArt, FAQChat });
