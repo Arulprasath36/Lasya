@@ -105,31 +105,89 @@ function Instructor() {
 }
 
 const quotes = [
-  { q: 'My daughter found a confidence on stage I never knew she had. Lasya is magic.', n: 'Priya R.', r: 'Parent, Kids Bollywood' },
-  { q: 'The best hour of my week. I sweat, I smile, and I actually learned the moves.', n: 'Daniel K.', r: 'Adult Fitness' },
-  { q: 'They choreographed our whole sangeet — the floor never emptied. Unforgettable.', n: 'Anita & Rohan', r: 'Wedding Event' },
+  { q: "I can’t thank Mathu enough for the incredible coaching my child received! The stage performance was a huge success, and it was all thanks to the confidence and skills they gained in class. Lasya creates a warm and encouraging environment that truly brings out the best in every dancer!", n: "Priya R.", r: "Parent, Kids Bollywood Dance" },
+  { q: "As an adult returning to dance after years away, I was nervous about performing on stage. Mathu not only taught me the choreography but also helped me build the confidence to shine on stage. The coaching was exceptional, and the experience was unforgettable!", n: "Swathi", r: "Adult Bollywood Dance" },
+  { q: "My son had his dance tutored by Mathumitha Balu for the past 3 years and he had gained his confidence in dance within few classes. She is good in handling kids and especially when it comes to dance, she’s dedicated and very much comfortable to work with. Managing kids needs patience and good handling techniques to keep their focus on dance, in which she’s really good at. I have seen her dance classes which was composed and organized in what she does. Happy to have her as my son’s dance tutor and we feel happy and satisfied of my kids dance improvement.", n: "Bindhu", r: "Parent, Kids Bollywood Dance" },
+  { q: "Lasya completely transformed our sangeet! Mathumitha choreographed routines for four different family groups and made the whole process so smooth and fun. Every single guest ended up on the dance floor. It was the highlight of our wedding weekend.", n: "Anita & Rohan", r: "Wedding Choreography" },
+  { q: "My daughter was extremely shy before joining Lasya. Within just a few months she was performing on stage with a huge smile. The way Mathumitha connects with kids and builds their confidence is truly special. We are so grateful!", n: "Deepa S.", r: "Parent, Kids Bollywood Dance" },
+  { q: "The teen batch is so well structured — technique, expression, formations, everything is covered. My daughter looks forward to every class and has grown so much as a performer. Highly recommend Lasya to any teenager passionate about dance.", n: "Kavitha M.", r: "Parent, Teen Dance" },
 ];
 
+const PEEK = 80;
+const GAP = 20;
+
 function Testimonials() {
+  const [idx, setIdx] = useState(0);
+  const [cardW, setCardW] = useState(0);
+  const containerRef = useRef(null);
+  const total = quotes.length;
+
+  useEffect(() => {
+    const measure = () => {
+      if (containerRef.current) setCardW(containerRef.current.offsetWidth - PEEK * 2);
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, []);
+
+  useEffect(() => {
+    const t = setInterval(() => setIdx(i => (i + 1) % total), 5500);
+    return () => clearInterval(t);
+  }, [total]);
+
+  const goTo = (next) => setIdx((next + total) % total);
+  const offset = PEEK - idx * (cardW + GAP);
+
   return (
     <section className="section sec-testimonials">
-      <div className="wrap">
+      <div className="wrap" style={{ maxWidth: 900 }}>
         <div className="reveal" style={{ textAlign: 'center' }}>
           <Eyebrow style={{ justifyContent: 'center' }}>Student Stories</Eyebrow>
         </div>
-        <div className="grid-3" style={{ marginTop: 40 }}>
-          {quotes.map((t, i) => (
-            <figure key={t.n} className={`lift reveal reveal-d${(i % 3) + 1}`} style={{ background: 'var(--surface-1)', border: '1px solid var(--hairline)', borderRadius: 'var(--r-lg)', padding: 30 }}>
-              <Icon name="quote" size={28} color="var(--gold-500)" style={{ opacity: .7 }} />
-              <blockquote style={{ fontFamily: 'var(--font-display)', fontSize: 23, lineHeight: 1.35, color: 'var(--fg-1)', marginTop: 14, textWrap: 'pretty' }}>{t.q}</blockquote>
-              <figcaption style={{ marginTop: 22, display: 'flex', alignItems: 'center', gap: 12 }}>
-                <span style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--grad-peacock)', flex: '0 0 auto' }} />
-                <span>
-                  <span style={{ display: 'block', fontSize: 15, color: 'var(--fg-1)' }}>{t.n}</span>
-                  <span style={{ display: 'block', fontSize: 13, color: 'var(--fg-3)' }}>{t.r}</span>
-                </span>
-              </figcaption>
-            </figure>
+
+        <div ref={containerRef} style={{ overflow: 'hidden', marginTop: 48 }}>
+          <div style={{
+            display: 'flex', gap: GAP,
+            transform: `translateX(${offset}px)`,
+            transition: 'transform 0.5s cubic-bezier(0.4,0,0.2,1)',
+            willChange: 'transform',
+          }}>
+            {quotes.map((q, i) => (
+              <figure
+                key={q.n}
+                onClick={() => i !== idx && goTo(i)}
+                style={{
+                  flex: `0 0 ${cardW}px`,
+                  background: 'var(--surface-1)',
+                  border: `1px solid ${i === idx ? 'rgba(216,178,90,.35)' : 'var(--hairline)'}`,
+                  borderRadius: 'var(--r-lg)',
+                  padding: '36px 40px',
+                  opacity: i === idx ? 1 : 0.45,
+                  transform: `scale(${i === idx ? 1 : 0.96})`,
+                  transition: 'opacity .4s, transform .4s, border-color .4s',
+                  cursor: i !== idx ? 'pointer' : 'default',
+                  userSelect: 'none',
+                }}
+              >
+                <Icon name="quote" size={28} color="var(--gold-500)" style={{ opacity: .7 }} />
+                <blockquote style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.45, color: 'var(--fg-1)', marginTop: 16, textWrap: 'pretty' }}>{q.q}</blockquote>
+                <figcaption style={{ marginTop: 24, display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <span style={{ width: 42, height: 42, borderRadius: '50%', background: 'var(--grad-peacock)', flex: '0 0 auto' }} />
+                  <span>
+                    <span style={{ display: 'block', fontSize: 15, color: 'var(--fg-1)', fontWeight: 500 }}>{q.n}</span>
+                    <span style={{ display: 'block', fontSize: 13, color: 'var(--fg-3)', marginTop: 2 }}>{q.r}</span>
+                  </span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+
+        {/* dots */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 28 }}>
+          {quotes.map((_, i) => (
+            <button key={i} onClick={() => goTo(i)} aria-label={`Testimonial ${i + 1}`} style={{ width: i === idx ? 24 : 8, height: 8, borderRadius: 4, background: i === idx ? 'var(--gold-400)' : 'var(--hairline)', border: 'none', cursor: 'pointer', padding: 0, transition: 'width .3s, background .3s' }} />
           ))}
         </div>
       </div>

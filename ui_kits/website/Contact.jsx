@@ -10,9 +10,35 @@ function Field({ label, children }) {
 }
 const fieldStyle = { width: '100%', background: 'var(--surface-1)', border: '1px solid var(--hairline)', borderRadius: 'var(--r-md)', padding: '13px 15px', color: 'var(--fg-1)', fontSize: 15, fontFamily: 'var(--font-sans)', outline: 'none' };
 
-function RegisterModal({ open, onClose }) {
-  const [done, setDone] = useState(false);
-  useEffect(() => { if (open) setDone(false); }, [open]);
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/lasyadancefitness@gmail.com';
+
+function RegisterModal({ open, onClose, initialProgram = 'Kids Bollywood' }) {
+  const [status, setStatus] = useState('idle'); // idle | submitting | done | error
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [program, setProgram] = useState(initialProgram);
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    if (open) { setStatus('idle'); setName(''); setEmail(''); setMobile(''); setProgram(initialProgram); setMessage(''); }
+  }, [open, initialProgram]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('submitting');
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, mobile, program, message }),
+      });
+      setStatus(res.ok ? 'done' : 'error');
+    } catch {
+      setStatus('error');
+    }
+  };
+
   if (!open) return null;
   return (
     <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(4,5,9,.72)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
@@ -27,25 +53,40 @@ function RegisterModal({ open, onClose }) {
             <button onClick={onClose} aria-label="Close" style={{ background: 'var(--surface-1)', border: '1px solid var(--hairline)', borderRadius: '50%', width: 38, height: 38, color: 'var(--fg-2)', cursor: 'pointer', fontSize: 18, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="x" size={18} /></button>
           </div>
 
-          {done ? (
+          {status === 'done' ? (
             <div style={{ textAlign: 'center', padding: '28px 0 8px' }}>
-              <div style={{ width: 60, height: 60, margin: '0 auto', borderRadius: '50%', background: 'color-mix(in srgb, var(--emerald-500) 18%, transparent)', border: '1px solid var(--emerald-500)', color: 'var(--emerald-400)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 30 }}><Icon name="check" size={30} /></div>
+              <div style={{ width: 60, height: 60, margin: '0 auto', borderRadius: '50%', background: 'color-mix(in srgb, var(--emerald-500) 18%, transparent)', border: '1px solid var(--emerald-500)', color: 'var(--emerald-400)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="check" size={30} /></div>
               <h4 style={{ fontFamily: 'var(--font-display)', fontSize: 26, marginTop: 18 }}>See you on the floor!</h4>
               <p style={{ color: 'var(--fg-2)', fontSize: 15, marginTop: 8 }}>We'll email you class times shortly.</p>
               <div style={{ marginTop: 22 }}><Button onClick={onClose}>Done</Button></div>
             </div>
           ) : (
-            <form onSubmit={(e) => { e.preventDefault(); setDone(true); }} style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 22 }}>
-              <Field label="Student name"><input style={fieldStyle} placeholder="Aanya Sharma" required /></Field>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 22 }}>
+              <Field label="Student name *">
+                <input style={fieldStyle} placeholder="Aanya Sharma" required value={name} onChange={e => setName(e.target.value)} />
+              </Field>
+              <Field label="Email *">
+                <input type="email" style={fieldStyle} placeholder="you@email.com" required value={email} onChange={e => setEmail(e.target.value)} />
+              </Field>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
-                <Field label="Email"><input type="email" style={fieldStyle} placeholder="you@email.com" required /></Field>
-                <Field label="Program">
-                  <select style={{ ...fieldStyle, appearance: 'none' }}>
+                <Field label="Mobile number">
+                  <input type="tel" style={fieldStyle} placeholder="98765 43210" value={mobile} onChange={e => setMobile(e.target.value)} pattern="[\d\s\+\(\)\-]{10,15}" title="Please enter a valid phone number (10–15 digits)" />
+                </Field>
+                <Field label="Interested In">
+                  <select style={{ ...fieldStyle, appearance: 'none' }} value={program} onChange={e => setProgram(e.target.value)}>
                     <option>Kids Bollywood</option><option>Teen Dance</option><option>Adult Bollywood Fitness</option><option>Wedding &amp; Event</option>
                   </select>
                 </Field>
               </div>
-              <Button type="submit" icon="sparkles" style={{ justifyContent: 'center', marginTop: 6 }}>Register Now</Button>
+              <Field label="Message">
+                <textarea style={{ ...fieldStyle, resize: 'vertical', minHeight: 90 }} placeholder="Any questions or details you'd like to share… (optional)" value={message} onChange={e => setMessage(e.target.value)} rows={3} />
+              </Field>
+              {status === 'error' && (
+                <p style={{ fontSize: 13, color: 'var(--magenta-400)', margin: 0 }}>Something went wrong — please try again or email us directly.</p>
+              )}
+              <Button type="submit" icon={status === 'submitting' ? 'loader' : 'sparkles'} style={{ justifyContent: 'center', marginTop: 6 }} disabled={status === 'submitting'}>
+                {status === 'submitting' ? 'Sending…' : 'Register Now'}
+              </Button>
             </form>
           )}
         </div>
@@ -54,7 +95,78 @@ function RegisterModal({ open, onClose }) {
   );
 }
 
-function FinalCTA({ onJoin }) {
+function ContactModal({ open, onClose }) {
+  const [status, setStatus] = useState('idle');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    if (open) { setStatus('idle'); setName(''); setEmail(''); setMessage(''); }
+  }, [open]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('submitting');
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message, _subject: 'New message from Lasya website' }),
+      });
+      setStatus(res.ok ? 'done' : 'error');
+    } catch {
+      setStatus('error');
+    }
+  };
+
+  if (!open) return null;
+  return (
+    <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(4,5,9,.72)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+      <div onClick={(e) => e.stopPropagation()} style={{ width: 'min(480px,100%)', background: 'var(--ink-700)', border: '1px solid var(--hairline)', borderRadius: 'var(--r-lg)', boxShadow: 'var(--shadow-lg)', overflow: 'hidden' }}>
+        <div style={{ height: 4, background: 'var(--grad-peacock)' }} />
+        <div style={{ padding: 32 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div>
+              <Eyebrow>Get in touch</Eyebrow>
+              <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 32, marginTop: 12 }}>Contact Us</h3>
+            </div>
+            <button onClick={onClose} aria-label="Close" style={{ background: 'var(--surface-1)', border: '1px solid var(--hairline)', borderRadius: '50%', width: 38, height: 38, color: 'var(--fg-2)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="x" size={18} /></button>
+          </div>
+
+          {status === 'done' ? (
+            <div style={{ textAlign: 'center', padding: '28px 0 8px' }}>
+              <div style={{ width: 60, height: 60, margin: '0 auto', borderRadius: '50%', background: 'color-mix(in srgb, var(--emerald-500) 18%, transparent)', border: '1px solid var(--emerald-500)', color: 'var(--emerald-400)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="check" size={30} /></div>
+              <h4 style={{ fontFamily: 'var(--font-display)', fontSize: 26, marginTop: 18 }}>Message sent!</h4>
+              <p style={{ color: 'var(--fg-2)', fontSize: 15, marginTop: 8 }}>We'll get back to you as soon as possible.</p>
+              <div style={{ marginTop: 22 }}><Button onClick={onClose}>Done</Button></div>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 22 }}>
+              <Field label="Name *">
+                <input style={fieldStyle} placeholder="Your name" required value={name} onChange={e => setName(e.target.value)} />
+              </Field>
+              <Field label="Email *">
+                <input type="email" style={fieldStyle} placeholder="you@email.com" required value={email} onChange={e => setEmail(e.target.value)} />
+              </Field>
+              <Field label="Message *">
+                <textarea style={{ ...fieldStyle, resize: 'vertical', minHeight: 110 }} placeholder="How can we help you?" required value={message} onChange={e => setMessage(e.target.value)} rows={4} />
+              </Field>
+              {status === 'error' && (
+                <p style={{ fontSize: 13, color: 'var(--magenta-400)', margin: 0 }}>Something went wrong — please try again or email us directly.</p>
+              )}
+              <Button type="submit" icon={status === 'submitting' ? 'loader' : 'send'} style={{ justifyContent: 'center', marginTop: 6 }} disabled={status === 'submitting'}>
+                {status === 'submitting' ? 'Sending…' : 'Send Message'}
+              </Button>
+            </form>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function FinalCTA({ onJoin, onContact }) {
   return (
     <section id="contact" className="section" style={{ position: 'relative', overflow: 'hidden', textAlign: 'center' }}>
       <MotionArt opacity={0.42} />
@@ -65,18 +177,23 @@ function FinalCTA({ onJoin }) {
           Ready to dance<br />with <span style={{ fontStyle: 'italic', color: 'var(--gold-400)' }}>Lasya?</span>
         </h2>
         <p style={{ fontSize: 19, color: 'var(--fg-2)', marginTop: 22, fontWeight: 300 }}>Your first class is the start of something joyful.</p>
+        <p style={{ fontSize: 16, color: 'var(--fg-3)', marginTop: 28, lineHeight: 1.7, maxWidth: 560, margin: '28px auto 0' }}>
+          Have a question? Curious about classes?<br />
+          Reach out anytime. No pressure, no obligations,<br />
+          and no endless promotional calls.
+        </p>
         <div style={{ display: 'flex', gap: 14, justifyContent: 'center', marginTop: 36, flexWrap: 'wrap' }}>
           <Button onClick={onJoin} icon="sparkles">Register Now</Button>
-          <Button variant="secondary" icon="phone-call">Contact Us</Button>
+          <Button onClick={onContact} variant="secondary" icon="phone-call">Contact Us</Button>
         </div>
       </div>
     </section>
   );
 }
 
-function Footer() {
+function Footer({ onContact, onJoin }) {
   return (
-    <footer style={{ borderTop: '1px solid var(--hairline)', background: 'var(--ink-800)' }}>
+    <footer style={{ borderTop: '1px solid var(--hairline)', background: 'var(--ink-800)', marginTop: 0 }}>
       <div className="wrap footer-grid" style={{ padding: '56px 32px 40px' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -93,17 +210,20 @@ function Footer() {
           <div key={h}>
             <div style={{ fontFamily: 'var(--font-label)', textTransform: 'uppercase', letterSpacing: '.2em', fontSize: 12.5, color: 'var(--gold-500)' }}>{h}</div>
             <ul style={{ listStyle: 'none', marginTop: 16, display: 'flex', flexDirection: 'column', gap: 11 }}>
-              {items.map((it) => <li key={it}><a href="#" className="nav-link" style={{ fontSize: 14.5 }}>{it}</a></li>)}
+              {items.map((it) => {
+                if (it === 'Contact') return <li key={it}><button onClick={onContact} className="nav-link" style={{ fontSize: 14.5, background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' }}>{it}</button></li>;
+                if (it === 'Register') return <li key={it}><button onClick={onJoin} className="nav-link" style={{ fontSize: 14.5, background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' }}>{it}</button></li>;
+                return <li key={it}><a href={`#${it.toLowerCase()}`} className="nav-link" style={{ fontSize: 14.5 }}>{it}</a></li>;
+              })}
             </ul>
           </div>
         ))}
       </div>
-      <div className="wrap" style={{ padding: '20px 32px', borderTop: '1px solid var(--hairline)', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10 }}>
+      <div className="wrap" style={{ padding: '20px 32px', borderTop: '1px solid var(--hairline)' }}>
         <span style={{ fontSize: 13, color: 'var(--fg-3)' }}>© 2026 Lasya Dance School</span>
-        <span style={{ fontSize: 13, color: 'var(--fg-3)' }}>Made with rhythm ✦</span>
       </div>
     </footer>
   );
 }
 
-Object.assign(window, { RegisterModal, FinalCTA, Footer });
+Object.assign(window, { RegisterModal, ContactModal, FinalCTA, Footer });

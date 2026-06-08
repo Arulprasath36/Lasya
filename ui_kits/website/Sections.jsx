@@ -33,7 +33,7 @@ const programs = [
   { t: 'Wedding & Event', s: 'Choreography', d: 'Custom sangeet and event choreography that gets every guest on the floor.', c: 'var(--royal-500)', ic: 'party-popper' },
 ];
 
-function ProgramCard({ p, i }) {
+function ProgramCard({ p, i, onJoin }) {
   return (
     <article className={`lift reveal reveal-d${(i % 3) + 1}`} style={{ background: 'var(--surface-1)', border: '1px solid var(--hairline)', borderRadius: 'var(--r-lg)', padding: 26, boxShadow: 'var(--shadow-md)' }}>
       <div style={{ width: 52, height: 52, borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', background: `color-mix(in srgb, ${p.c} 16%, transparent)`, border: `1px solid color-mix(in srgb, ${p.c} 45%, transparent)`, color: p.c, fontSize: 27 }}>
@@ -43,14 +43,14 @@ function ProgramCard({ p, i }) {
       <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 28, marginTop: 4 }}>{p.t}</h3>
       <p style={{ fontSize: 14.5, lineHeight: 1.6, color: 'var(--fg-2)', marginTop: 10, textWrap: 'pretty' }}>{p.d}</p>
       <div style={{ marginTop: 18, height: 3, borderRadius: 3, background: `linear-gradient(90deg, ${p.c}, transparent)` }} />
-      <a href="#contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, marginTop: 18, fontSize: 14, color: 'var(--gold-400)' }}>
+      <button onClick={() => onJoin(p.t)} style={{ display: 'inline-flex', alignItems: 'center', gap: 7, marginTop: 18, fontSize: 14, color: 'var(--gold-400)', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' }}>
         Enroll <Icon name="arrow-right" size={15} />
-      </a>
+      </button>
     </article>
   );
 }
 
-function Programs() {
+function Programs({ onJoin }) {
   return (
     <section id="programs" className="section">
       <div className="wrap">
@@ -62,7 +62,7 @@ function Programs() {
           <p className="reveal reveal-d2" style={{ fontSize: 16, color: 'var(--fg-2)', maxWidth: 360, lineHeight: 1.6 }}>From first steps to the spotlight — a program for every age and every stage.</p>
         </div>
         <div className="grid-4" style={{ marginTop: 48 }}>
-          {programs.map((p, i) => <ProgramCard key={p.t} p={p} i={i} />)}
+          {programs.map((p, i) => <ProgramCard key={p.t} p={p} i={i} onJoin={onJoin} />)}
         </div>
       </div>
     </section>
@@ -70,10 +70,10 @@ function Programs() {
 }
 
 const reasons = [
-  { ic: 'drama', t: 'Expression first', d: 'We teach the face, the hands, the feeling — not just the feet.' },
-  { ic: 'users', t: 'Formations & teamwork', d: 'Dance as a troupe; learn to move as one and shine together.' },
-  { ic: 'mic-vocal', t: 'Real performances', d: 'Showcases and events give every student a true stage moment.' },
-  { ic: 'medal', t: 'Confidence that lasts', d: 'Poise and presence that carry into school, work, and life.' },
+  { ic: 'drama', t: 'Expression & storytelling', d: 'Learn to dance with emotion, confidence, and presence—not just memorize steps.' },
+  { ic: 'users', t: 'Teamwork & friendships', d: 'Grow alongside a supportive community that celebrates every achievement.' },
+  { ic: 'mic-vocal', t: 'Real stage experience', d: 'Perform at showcases, cultural events, and recitals that create lasting memories.' },
+  { ic: 'medal', t: 'Confidence beyond dance', d: 'Build poise, discipline, and self-belief that extends far beyond the stage.' },
 ];
 
 function WhyLasya() {
@@ -82,7 +82,9 @@ function WhyLasya() {
       <div className="wrap">
         <div className="reveal" style={{ textAlign: 'center', maxWidth: 640, margin: '0 auto' }}>
           <Eyebrow style={{ justifyContent: 'center' }}>Why Students Love Lasya</Eyebrow>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 'clamp(32px,4vw,54px)', marginTop: 16 }}>Learn choreography, expressions, formations & performance confidence.</h2>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 'clamp(32px,4vw,54px)', marginTop: 16 }}>More than dance lessons.<br></br>
+A place to grow, perform,
+and belong.</h2>
         </div>
         <div className="grid-4" style={{ marginTop: 54 }}>
           {reasons.map((r, i) => (

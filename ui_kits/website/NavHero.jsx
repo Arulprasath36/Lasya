@@ -41,7 +41,9 @@ function Hero({ onJoin, slideshow = true }) {
             <span style={{ display: 'block', whiteSpace: 'nowrap', fontStyle: 'italic', color: 'var(--gold-400)', marginTop: 8 }}>Own the Stage.</span>
           </h1>
           <p className="reveal reveal-d2" style={{ fontFamily: 'var(--font-sans)', fontWeight: 300, fontSize: 'clamp(18px,1.7vw,22px)', lineHeight: 1.55, color: 'var(--fg-2)', marginTop: 26, maxWidth: 520 }}>
-            Lasya is a joyful Bollywood dance school helping kids, teens, and adults build confidence, expression, rhythm, and stage presence.
+            A welcoming community where children,
+teens, and adults grow through movement,
+creativity, and unforgettable performances.
           </p>
           <div className="reveal reveal-d3" style={{ display: 'flex', gap: 14, marginTop: 36, flexWrap: 'wrap' }}>
             <Button onClick={onJoin} icon="sparkles">Join a Class</Button>

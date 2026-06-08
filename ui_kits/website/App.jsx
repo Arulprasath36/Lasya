@@ -7,9 +7,11 @@ const LASYA_TWEAKS = /*EDITMODE-BEGIN*/{
 
 function App() {
   const [modal, setModal] = useState(false);
+  const [selectedProgram, setSelectedProgram] = useState('Kids Bollywood');
+  const [contactModal, setContactModal] = useState(false);
   const [t, setTweak] = useTweaks(LASYA_TWEAKS);
   useReveal();
-  const join = useCallback(() => setModal(true), []);
+  const join = useCallback((program) => { if (program) setSelectedProgram(program); setModal(true); }, []);
 
   // apply background mood + accent to the document
   useEffect(() => {
@@ -26,15 +28,16 @@ function App() {
       <main>
         <Hero onJoin={join} slideshow={t.slideshow} />
         <About />
-        <Programs />
+        <Programs onJoin={join} />
         <WhyLasya />
         <Gallery />
         <Instructor />
         <Testimonials />
-        <FinalCTA onJoin={join} />
+        <FinalCTA onJoin={join} onContact={() => setContactModal(true)} />
       </main>
-      <Footer />
-      <RegisterModal open={modal} onClose={() => setModal(false)} />
+      <Footer onContact={() => setContactModal(true)} onJoin={join} />
+      <RegisterModal open={modal} onClose={() => setModal(false)} initialProgram={selectedProgram} />
+      <ContactModal open={contactModal} onClose={() => setContactModal(false)} />
       <FAQChat />
 
       <TweaksPanel>
