@@ -1,6 +1,6 @@
-# Lasya — Website UI Kit
+# Madhu Dance Academy — Website UI Kit
 
-A high-fidelity, interactive recreation of the **Lasya marketing website**: a dark-luxury,
+A high-fidelity, interactive recreation of the **Madhu Dance Academy marketing website**: a dark-luxury,
 peacock-themed, motion-forward single page for a Bollywood dance school.
 
 > Built from the brand brief (no production codebase exists yet). This is the reference
@@ -24,11 +24,11 @@ Then visit `http://localhost:8001/`. It's a click-through prototype:
 | File | Contents |
 |---|---|
 | `index.html` | Entry point — loads fonts, Lucide, React/Babel, and all components. |
-| `colors_and_type.css` | Local copy of the Lasya design tokens used by the prototype. |
+| `colors_and_type.css` | Local copy of the Madhu Dance Academy design tokens used by the prototype. |
 | `site.css` | Page styles, responsive grids, motion/ambience, reveal helpers. |
 | `lib.jsx` | Shared hooks + atoms: `useReveal`, `useScrolled`, `Eyebrow`, `Button`, `Icon` (Lucide), `Particles`, `CursorEye`. |
 | `NavHero.jsx` | `Nav`, `Hero`, `HeroSlideshow` (slow cinematic cross-fade of the hero portrait — auto-advances every ~4.2s with subtle progress dots; respects reduced-motion). |
-| `Sections.jsx` | `About`, `Programs` (program cards), `WhyLasya` (feature grid). |
+| `Sections.jsx` | `About`, `Programs` (program cards), `WhyMadhu Dance Academy` (feature grid). |
 | `Showcase.jsx` | `Gallery` (horizontal scroll), `Instructor`, `Testimonials`. |
 | `Contact.jsx` | `FinalCTA`, `RegisterModal`, `Footer`. |
 | `App.jsx` | Assembles the page and wires the modal. |

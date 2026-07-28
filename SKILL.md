@@ -1,12 +1,12 @@
 ---
-name: lasya-design
-description: Use this skill to generate well-branded interfaces and assets for Lasya, a Bollywood dance school, either for production or throwaway prototypes/mocks/etc. Contains essential design guidelines, colors, type, fonts, assets, and UI kit components for prototyping.
+name: madhu-design
+description: Use this skill to generate well-branded interfaces and assets for Madhu Dance Academy, a Bollywood dance school, either for production or throwaway prototypes/mocks/etc. Contains essential design guidelines, colors, type, fonts, assets, and UI kit components for prototyping.
 user-invocable: true
 ---
 
-# Lasya Design Skill
+# Madhu Dance Academy Design Skill
 
-Lasya is a Bollywood dance school (kids, teens, adults). Brand: **"Where rhythm becomes
+Madhu Dance Academy is a Bollywood dance school (kids, teens, adults). Brand: **"Where rhythm becomes
 expression."** Dark-luxury, cinematic, peacock-jewel palette on deep ink, gold as the single
 primary accent. Elegant Cormorant Garamond display + Manrope body. Joyful but never childish.
 
@@ -20,8 +20,8 @@ primary accent. Elegant Cormorant Garamond display + Manrope body. Joyful but ne
    gallery, modal, footer) and `site.css` patterns.
 
 ## Assets
-- `assets/logo-lasya.png` — primary logo (peacock-swan *laSya* wordmark + tagline, transparent).
-- `assets/logo-lasya-nav.png` — tagline-free crop for nav / small use.
+- `assets/logo-madhu.png` — primary logo (black circular badge, gold "M" monogram + "MADHU DANCE ACADEMY" wordmark, transparent).
+- `assets/logo-madhu-nav.png` — tagline-free crop for nav / small use.
 - Icons: **Lucide** via CDN, rendered as inline SVG. Imagery: real performance photos in
   `assets/photos/` (hero, about, gallery); `image-slot` placeholder only for the founder portrait.
 - Motion: a JS-driven **motion-art** layer (drifting blurred brand-color blobs) flows behind

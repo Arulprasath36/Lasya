@@ -1,4 +1,4 @@
-/* Gallery (horizontal scroll) · Instructor · Testimonials */
+/* Gallery (horizontal scroll) · Testimonials */
 
 const galleryItems = [
   { src: 'girl-checkered-web.jpg', w: 440, label: 'Attitude' },
@@ -79,38 +79,13 @@ function Gallery() {
   );
 }
 
-function Instructor() {
-  return (
-    <section id="instructor" className="section">
-      <div className="wrap split-grid">
-        <div className="reveal">
-          <img src="assets/photos/ANU08358.jpg" alt="Mathumitha Balu — founder and instructor" style={{ width: '100%', height: 'auto', display: 'block' }} />
-        </div>
-        <div>
-          <div className="reveal"><Eyebrow>Your Instructor</Eyebrow></div>
-          <h2 className="reveal reveal-d1" style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 'clamp(30px,3.6vw,52px)', lineHeight: 1.05, marginTop: 18 }}>
-            Founded on grace,<br />taught with joy.
-          </h2>
-          <p className="reveal reveal-d2" style={{ fontSize: 18, lineHeight: 1.7, color: 'var(--fg-2)', marginTop: 22, maxWidth: 520 }}>
-            "I started Lasya to share the dance I grew up loving — the music, the colour, the feeling. Every student who walks in nervous and walks out beaming is why we do this."
-          </p>
-          <div className="reveal reveal-d3" style={{ marginTop: 24 }}>
-            <div style={{ fontFamily: 'var(--font-display)', fontSize: 26 }}>Mathumitha Balu</div>
-            <div style={{ fontSize: 14, color: 'var(--gold-400)', fontFamily: 'var(--font-label)', letterSpacing: '.16em', textTransform: 'uppercase', marginTop: 4 }}>Founder &amp; Lead Choreographer</div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 const quotes = [
-  { q: "I can’t thank Mathu enough for the incredible coaching my child received! The stage performance was a huge success, and it was all thanks to the confidence and skills they gained in class. Lasya creates a warm and encouraging environment that truly brings out the best in every dancer!", n: "Priya R.", r: "Parent, Kids Bollywood Dance" },
+  { q: "I can’t thank Mathu enough for the incredible coaching my child received! The stage performance was a huge success, and it was all thanks to the confidence and skills they gained in class. Madhu Dance Academy creates a warm and encouraging environment that truly brings out the best in every dancer!", n: "Priya R.", r: "Parent, Kids Bollywood Dance" },
   { q: "As an adult returning to dance after years away, I was nervous about performing on stage. Mathu not only taught me the choreography but also helped me build the confidence to shine on stage. The coaching was exceptional, and the experience was unforgettable!", n: "Swathi", r: "Adult Bollywood Dance" },
   { q: "My son had his dance tutored by Mathumitha Balu for the past 3 years and he had gained his confidence in dance within few classes. She is good in handling kids and especially when it comes to dance, she’s dedicated and very much comfortable to work with. Managing kids needs patience and good handling techniques to keep their focus on dance, in which she’s really good at. I have seen her dance classes which was composed and organized in what she does. Happy to have her as my son’s dance tutor and we feel happy and satisfied of my kids dance improvement.", n: "Bindhu", r: "Parent, Kids Bollywood Dance" },
-  { q: "Lasya completely transformed our sangeet! Mathumitha choreographed routines for four different family groups and made the whole process so smooth and fun. Every single guest ended up on the dance floor. It was the highlight of our wedding weekend.", n: "Anita & Rohan", r: "Wedding Choreography" },
-  { q: "My daughter was extremely shy before joining Lasya. Within just a few months she was performing on stage with a huge smile. The way Mathumitha connects with kids and builds their confidence is truly special. We are so grateful!", n: "Deepa S.", r: "Parent, Kids Bollywood Dance" },
-  { q: "The teen batch is so well structured — technique, expression, formations, everything is covered. My daughter looks forward to every class and has grown so much as a performer. Highly recommend Lasya to any teenager passionate about dance.", n: "Kavitha M.", r: "Parent, Teen Dance" },
+  { q: "Madhu Dance Academy completely transformed our sangeet! Mathumitha choreographed routines for four different family groups and made the whole process so smooth and fun. Every single guest ended up on the dance floor. It was the highlight of our wedding weekend.", n: "Anita & Rohan", r: "Wedding Choreography" },
+  { q: "My daughter was extremely shy before joining Madhu Dance Academy. Within just a few months she was performing on stage with a huge smile. The way Mathumitha connects with kids and builds their confidence is truly special. We are so grateful!", n: "Deepa S.", r: "Parent, Kids Bollywood Dance" },
+  { q: "The teen batch is so well structured — technique, expression, formations, everything is covered. My daughter looks forward to every class and has grown so much as a performer. Highly recommend Madhu Dance Academy to any teenager passionate about dance.", n: "Kavitha M.", r: "Parent, Teen Dance" },
 ];
 
 const PEEK = 80;
@@ -195,4 +170,4 @@ function Testimonials() {
   );
 }
 
-Object.assign(window, { Gallery, Instructor, Testimonials });
+Object.assign(window, { Gallery, Testimonials });

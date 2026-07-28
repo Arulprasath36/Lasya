@@ -1,5 +1,33 @@
 /* Nav + Hero */
-const navLinks = ['About', 'Programs', 'Gallery', 'Instructor', 'Contact'];
+const navLinks = ['About', 'Programs', 'Gallery', 'Contact'];
+
+/* Decorative stage-rig spotlights: a truss bar with fanned can fixtures hanging
+   above the hero photo frame, each throwing a soft beam — pure ambiance, never
+   blended onto the photo itself. */
+function StageLights() {
+  const fixtures = [
+    { left: '10%', angle: -24, delay: '0s' },
+    { left: '30%', angle: -12, delay: '-1.2s' },
+    { left: '50%', angle: 0, delay: '-2.4s' },
+    { left: '70%', angle: 12, delay: '-3.6s' },
+    { left: '90%', angle: 24, delay: '-4.8s' },
+  ];
+  return (
+    <div className="stage-rig" aria-hidden="true">
+      <div className="stage-truss" />
+      {fixtures.map((f, idx) => (
+        <div key={idx} className="stage-fixture-mount" style={{ left: f.left, transform: `rotate(${f.angle}deg)` }}>
+          <div className="fixture-bracket" />
+          <div className="stage-fixture-sway" style={{ animationDelay: f.delay }}>
+            <div className="fixture-can" />
+            <div className="fixture-glow" />
+            <div className="fixture-beam" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 function Nav({ onJoin }) {
   const scrolled = useScrolled();
@@ -7,8 +35,8 @@ function Nav({ onJoin }) {
   return (
     <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
       <div className="wrap" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 84 }}>
-        <a href="#top" style={{ display: 'flex', alignItems: 'center' }} aria-label="Lasya — Bollywood Dance School">
-          <img src="assets/logo-lasya-nav.png" style={{ height: 60 }} alt="Lasya" />
+        <a href="#top" style={{ display: 'flex', alignItems: 'center' }} aria-label="Madhu Dance Academy — Bollywood Dance School">
+          <img src="assets/logo-madhu-nav.png" style={{ height: 80 }} alt="Madhu Dance Academy" />
         </a>
         <div className="hide-sm" style={{ display: 'flex', gap: 32 }}>
           {navLinks.map((l) => <a key={l} className="nav-link" href={`#${l.toLowerCase()}`}>{l}</a>)}
@@ -65,9 +93,10 @@ creativity, and unforgettable performances.
 
         {/* hero portrait — feather-framed image slot */}
         <div className="reveal reveal-d2 hero-aside" style={{ position: 'relative' }}>
-          <div style={{ position: 'absolute', inset: -12, borderRadius: 'var(--r-xl)', background: 'var(--grad-peacock)', filter: 'blur(2px)', opacity: .5 }} />
+          <div style={{ position: 'absolute', inset: -20, borderRadius: 'var(--r-xl)', background: 'radial-gradient(120% 100% at 50% 0%, var(--gold-500) 0%, transparent 65%)', filter: 'blur(36px)', opacity: .3 }} />
+          <StageLights />
           {slideshow ? <HeroSlideshow /> : (
-            <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: 480, borderRadius: 28, overflow: 'hidden' }}>
+            <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: 480, borderRadius: 28, overflow: 'hidden', border: '1px solid rgba(216,178,90,.5)', boxShadow: '0 0 0 1px rgba(7,8,13,.6), 0 32px 64px -24px rgba(0,0,0,.7)' }}>
               <Photo src="assets/photos/silhouette-moon-web.jpg" alt="Dancer in silhouette against a glowing moon" radius={28} pos="center 30%" />
             </div>
           )}
@@ -96,7 +125,7 @@ function HeroSlideshow({ interval = 4200 }) {
     return () => clearInterval(id);
   }, [interval, reduce]);
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: 480, borderRadius: 28, overflow: 'hidden', background: 'var(--ink-800)' }}>
+    <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: 480, borderRadius: 28, overflow: 'hidden', background: 'var(--ink-800)', border: '1px solid rgba(216,178,90,.5)', boxShadow: '0 0 0 1px rgba(7,8,13,.6), 0 32px 64px -24px rgba(0,0,0,.7)' }}>
       {heroShots.map((s, idx) => (
         <img key={s.src} src={`assets/photos/${s.src}-web.jpg`} alt={s.alt} loading={idx === 0 ? 'eager' : 'lazy'}
           style={{
@@ -108,7 +137,7 @@ function HeroSlideshow({ interval = 4200 }) {
           }} />
       ))}
       {/* progress dots */}
-      <div style={{ position: 'absolute', top: 16, right: 18, display: 'flex', gap: 6 }}>
+      <div style={{ position: 'absolute', top: 16, right: 18, display: 'flex', gap: 6, zIndex: 3 }}>
         {heroShots.map((_, idx) => (
           <button key={idx} onClick={() => setI(idx)} aria-label={`Show photo ${idx + 1}`}
             style={{ width: idx === i ? 22 : 7, height: 7, borderRadius: 999, border: 'none', cursor: 'pointer', padding: 0,

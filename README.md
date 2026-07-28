@@ -1,12 +1,12 @@
-# Lasya — Design System
+# Madhu Dance Academy — Design System
 
-**Lasya** is a Bollywood dance school for kids, teens, and adults. The brand promise:
-**"Where rhythm becomes expression."** Lasya teaches choreography, expression, formations,
+**Madhu Dance Academy** is a Bollywood dance school for kids, teens, and adults. The brand promise:
+**"From First Steps to Stage Lights."** Madhu Dance Academy teaches choreography, expression, formations,
 and performance confidence — and the identity should feel *elegant, joyful, cultural,
 cinematic, and modern*: a high-end creative-studio aesthetic that is still welcoming to
 parents and students. Not childish, not template-y.
 
-> Lasya (लास्य) is the graceful, expressive, feminine form of dance in Indian tradition —
+> Madhu Dance Academy (लास्य) is the graceful, expressive, feminine form of dance in Indian tradition —
 > the perfect name to anchor a brand about *expression*.
 
 ## Sources
@@ -21,7 +21,7 @@ see **Caveats** at the bottom.
 ## Brand at a glance
 
 - **Tagline / headline:** *Dance Bollywood. Feel the Rhythm. Own the Stage.*
-- **Sub:** *Lasya is a joyful Bollywood dance school for kids, teens, and adults.*
+- **Sub:** *Madhu Dance Academy is a joyful Bollywood dance school for kids, teens, and adults.*
 - **Core motif:** the **peacock feather "eye"** — abstracted into a monogram and into
   light-trail gradients that read as dance movement.
 - **Palette:** peacock jewels (gold, teal, emerald, royal blue, magenta) on **deep ink**.
@@ -31,12 +31,12 @@ see **Caveats** at the bottom.
 
 ## CONTENT FUNDAMENTALS
 
-How Lasya writes.
+How Madhu Dance Academy writes.
 
 - **Voice:** warm, confident, invitational. It celebrates the student. Joyful but never
   goofy — think a poised performer who wants you on stage with them.
 - **Person:** speaks to **"you"** ("Own the stage," "Find your rhythm"), and refers to the
-  school as **"Lasya"** or **"we."**
+  school as **"Madhu Dance Academy"** or **"we."**
 - **Casing:** Headlines in **Title Case** or sentence case set in the display serif.
   Eyebrows/labels in **UPPERCASE**, widely tracked (Marcellus). Body in sentence case.
 - **Rhythm of copy:** short, punchy, *beat-like* fragments for headlines — often three
@@ -46,9 +46,9 @@ How Lasya writes.
   choreography, joy, culture. Avoids hype/sales clichés ("unlock," "game-changer").
 - **Emoji:** **none.** The luxury register carries the warmth instead.
 - **Examples**
-  - Eyebrow: `OUR PROGRAMS` · `WHY LASYA` · `STUDENT STORIES`
+  - Eyebrow: `OUR PROGRAMS` · `WHY MADHU DANCE ACADEMY` · `STUDENT STORIES`
   - CTA buttons: **Join a Class** · **View Programs** · **Register Now** · **Contact Us**
-  - Section heads: *"More than steps — it's expression."* · *"Ready to dance with Lasya?"*
+  - Section heads: *"From First Steps to Stage Lights."* · *"Ready to dance with Madhu Dance Academy?"*
   - Program names: *Kids Bollywood · Teen Dance · Adult Bollywood Fitness · Wedding &
     Event Choreography*
 
@@ -127,12 +127,11 @@ reinforce the "stage light through haze" feel. Use sparingly — overlays, nav, 
   `<i data-lucide="music"></i>` + `lucide.createIcons()`.
 - **Usage:** icons are sparing and decorative-adjacent — program glyphs, nav, contact
   details, social. Gold or ivory stroke on dark. Never multicolor.
-- **Brand mark:** `assets/logo-lasya.png` is the **real primary logo** — a peacock-swan
-  forming the "S" of *laSya*, rendered in the pink→blue brand gradient with peacock-feather
-  plumes, over "BOLLYWOOD DANCE SCHOOL". `assets/logo-lasya-nav.png` is a tagline-free crop
-  for nav/small use. Both are keyed to transparency (black removed via additive-alpha
-  unpremultiply) so they composite cleanly over any dark/colored background. `logo-source.png`
-  is the original. (The earlier `logo-mark.svg` / `logo-wordmark.svg` placeholders are retired.)
+- **Brand mark:** `assets/logo-madhu.png` is the **real primary logo** — a black circular
+  badge with a gold-gradient "M" monogram (crescent + orbiting dot motif) over "MADHU DANCE
+  ACADEMY", ringed by a gold border. `assets/logo-madhu-nav.png` is a tagline-free crop
+  for nav/small use. `logo-source.png` is the original. (The earlier peacock-swan *laSya*
+  logo and the `logo-mark.svg` / `logo-wordmark.svg` placeholders are retired.)
   Everything else uses Lucide.
 - **Emoji / unicode icons:** not used.
 
@@ -143,8 +142,8 @@ reinforce the "stage light through haze" feel. Use sparingly — overlays, nav, 
 | File | What it is |
 |---|---|
 | `colors_and_type.css` | All color + type tokens (CSS variables) and semantic type helpers. |
-| `assets/logo-lasya.png` | Primary logo (peacock-swan wordmark + tagline, transparent). |
-| `assets/logo-lasya-nav.png` | Tagline-free logo crop for nav / small use. |
+| `assets/logo-madhu.png` | Primary logo (peacock-swan wordmark + tagline, transparent). |
+| `assets/logo-madhu-nav.png` | Tagline-free logo crop for nav / small use. |
 | `assets/photos/` | Real performance photography (web-optimized JPEGs from View By Anu). |
 | `preview/*.html` | Design-system cards (swatches, type specimens, components) shown in the Design System tab. |
 | `ui_kits/website/` | Website UI kit — `index.html` (interactive marketing site) + JSX components + README. |
@@ -159,8 +158,8 @@ if you need a fully-offline kit, ask and I'll vendor the `.woff2` files into `fo
 
 ## CAVEATS — help me make this perfect
 
-- **Logo — done.** The real peacock-swan *laSya* logo is now wired in (nav, footer, design
-  system). Send a vector/SVG version if you have one for crisp scaling at any size.
+- **Logo — done.** The real Madhu Dance Academy monogram logo is now wired in (nav, footer,
+  design system). Send a vector/SVG version if you have one for crisp scaling at any size.
 - **Fonts are Google-Fonts choices** (Cormorant Garamond + Manrope + Marcellus), per your
   Option 2 direction. Tell me if you'd prefer the Cinzel/Cinzel/Inter route instead.
 - **Imagery is real now** for hero, about, and gallery (your performance photos). The

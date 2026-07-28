@@ -112,7 +112,7 @@ function ContactModal({ open, onClose }) {
       const res = await fetch(FORM_ENDPOINT, {
         method: 'POST',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message, _subject: 'New message from Lasya website' }),
+        body: JSON.stringify({ name, email, message, _subject: 'New message from Madhu Dance Academy website' }),
       });
       setStatus(res.ok ? 'done' : 'error');
     } catch {
@@ -130,6 +130,10 @@ function ContactModal({ open, onClose }) {
             <div>
               <Eyebrow>Get in touch</Eyebrow>
               <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 32, marginTop: 12 }}>Contact Us</h3>
+              <a href="https://www.google.com/maps/search/?api=1&query=104+Schubert+Dr+Suite+B+Downingtown+PA" target="_blank" rel="noopener noreferrer" className="nav-link" style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginTop: 12, color: 'var(--gold-400)', fontSize: 14 }}>
+                <Icon name="map-pin" size={16} style={{ marginTop: 2, flexShrink: 0 }} />
+                <span style={{ textDecoration: 'underline', textUnderlineOffset: 3, textDecorationColor: 'rgba(236,203,121,.45)' }}>104 Schubert Dr (Suite B), Downingtown, PA</span>
+              </a>
             </div>
             <button onClick={onClose} aria-label="Close" style={{ background: 'var(--surface-1)', border: '1px solid var(--hairline)', borderRadius: '50%', width: 38, height: 38, color: 'var(--fg-2)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="x" size={18} /></button>
           </div>
@@ -174,7 +178,7 @@ function FinalCTA({ onJoin, onContact }) {
       <div className="wrap reveal" style={{ position: 'relative', zIndex: 2, maxWidth: 760 }}>
         <Eyebrow style={{ justifyContent: 'center' }}>Contact / Register</Eyebrow>
         <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: 'clamp(42px,6vw,88px)', lineHeight: 1, marginTop: 22 }}>
-          Ready to dance<br />with <span style={{ fontStyle: 'italic', color: 'var(--gold-400)' }}>Lasya?</span>
+          Ready to dance<br />with <span style={{ fontStyle: 'italic', color: 'var(--gold-400)' }}>Madhu Dance Academy?</span>
         </h2>
         <p style={{ fontSize: 19, color: 'var(--fg-2)', marginTop: 22, fontWeight: 300 }}>Your first class is the start of something joyful.</p>
         <p style={{ fontSize: 16, color: 'var(--fg-3)', marginTop: 28, lineHeight: 1.7, maxWidth: 560, margin: '28px auto 0' }}>
@@ -197,16 +201,25 @@ function Footer({ onContact, onJoin }) {
       <div className="wrap footer-grid" style={{ padding: '56px 32px 40px' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <img src="assets/logo-lasya.png" style={{ height: 92 }} alt="Lasya — Bollywood Dance School" />
+            <img src="assets/logo-madhu.png" style={{ height: 170 }} alt="Madhu Dance Academy — Bollywood Dance School" />
           </div>
-          <p style={{ color: 'var(--fg-3)', fontSize: 14.5, marginTop: 16, maxWidth: 320, lineHeight: 1.6 }}>Where rhythm becomes expression. A Bollywood dance school for kids, teens, and adults.</p>
+          <p style={{ color: 'var(--fg-2)', fontSize: 14.5, marginTop: 16, maxWidth: 320, lineHeight: 1.6 }}>From First Steps to Stage Lights. A Bollywood dance school for kids, teens, and adults.</p>
+          <a href="https://www.google.com/maps/search/?api=1&query=104+Schubert+Dr+Suite+B+Downingtown+PA" target="_blank" rel="noopener noreferrer" className="nav-link" style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginTop: 18, color: 'var(--gold-400)', fontSize: 14 }}>
+            <Icon name="map-pin" size={16} style={{ marginTop: 2, flexShrink: 0 }} />
+            <span style={{ textDecoration: 'underline', textUnderlineOffset: 3, textDecorationColor: 'rgba(236,203,121,.45)' }}>104 Schubert Dr (Suite B)<br />Downingtown, PA</span>
+          </a>
           <div style={{ display: 'flex', gap: 12, marginTop: 20 }}>
-            {['instagram', 'youtube', 'message-circle'].map((ic) => (
-              <a key={ic} href="#" style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--surface-1)', border: '1px solid var(--hairline)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--fg-2)', fontSize: 18 }}><Icon name={ic} size={18} /></a>
+            {[
+              { name: 'Instagram', src: 'assets/icon-instagram.png' },
+              { name: 'Facebook', src: 'assets/icon-facebook.png' },
+            ].map(({ name, src }) => (
+              <a key={name} href="#" aria-label={name} style={{ width: 40, height: 40, borderRadius: '50%', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img src={src} alt={name} style={{ width: '100%', height: '100%' }} />
+              </a>
             ))}
           </div>
         </div>
-        {[['Explore', ['About', 'Programs', 'Gallery', 'Instructor']], ['Visit', ['Studio hours', 'Find us', 'Contact', 'Register']]].map(([h, items]) => (
+        {[['Explore', ['About', 'Programs', 'Gallery']], ['Visit', ['Contact', 'Register']]].map(([h, items]) => (
           <div key={h}>
             <div style={{ fontFamily: 'var(--font-label)', textTransform: 'uppercase', letterSpacing: '.2em', fontSize: 12.5, color: 'var(--gold-500)' }}>{h}</div>
             <ul style={{ listStyle: 'none', marginTop: 16, display: 'flex', flexDirection: 'column', gap: 11 }}>
@@ -219,8 +232,8 @@ function Footer({ onContact, onJoin }) {
           </div>
         ))}
       </div>
-      <div className="wrap" style={{ padding: '20px 32px', borderTop: '1px solid var(--hairline)' }}>
-        <span style={{ fontSize: 13, color: 'var(--fg-3)' }}>© 2026 Lasya Dance School</span>
+      <div className="wrap" style={{ padding: '20px 32px', borderTop: '1px solid var(--hairline)', textAlign: 'center' }}>
+        <span style={{ fontSize: 13, color: 'var(--fg-3)' }}>© 2026 Madhu Dance Academy</span>
       </div>
     </footer>
   );

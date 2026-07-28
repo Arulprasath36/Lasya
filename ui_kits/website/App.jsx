@@ -1,5 +1,5 @@
-/* App — assembles the Lasya marketing site */
-const LASYA_TWEAKS = /*EDITMODE-BEGIN*/{
+/* App — assembles the Madhu Dance Academy marketing site */
+const MADHU_TWEAKS = /*EDITMODE-BEGIN*/{
   "mood": "vibrant",
   "slideshow": true,
   "accent": "#D8B25A"
@@ -9,7 +9,7 @@ function App() {
   const [modal, setModal] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState('Kids Bollywood');
   const [contactModal, setContactModal] = useState(false);
-  const [t, setTweak] = useTweaks(LASYA_TWEAKS);
+  const [t, setTweak] = useTweaks(MADHU_TWEAKS);
   useReveal();
   const join = useCallback((program) => { if (program) setSelectedProgram(program); setModal(true); }, []);
 
@@ -29,9 +29,8 @@ function App() {
         <Hero onJoin={join} slideshow={t.slideshow} />
         <About />
         <Programs onJoin={join} />
-        <WhyLasya />
+        <WhyMadhu />
         <Gallery />
-        <Instructor />
         <Testimonials />
         <FinalCTA onJoin={join} onContact={() => setContactModal(true)} />
       </main>

@@ -1,4 +1,4 @@
-/* ===== Lasya website UI kit — page styles, motion, ambience ===== */
+/* ===== Madhu Dance Academy website UI kit — page styles, motion, ambience ===== */
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;overflow-x:clip}
@@ -25,6 +25,28 @@ button{font-family:inherit}
 .masonry-3{columns:3;column-gap:20px}
 .masonry-3 > *{break-inside:avoid;display:inline-block;width:100%}
 .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+
+/* hero photo — decorative stage rig: truss bar + fanned can fixtures hanging above the frame */
+.stage-rig{position:absolute;left:6%;right:6%;top:-24px;height:58px;pointer-events:none;z-index:1;overflow:visible}
+.stage-truss{position:absolute;top:0;left:-16px;right:-16px;height:6px;border-radius:3px;
+  background:repeating-linear-gradient(90deg, var(--ink-500) 0 9px, var(--ink-900) 9px 11px);
+  box-shadow:0 1px 0 rgba(216,178,90,.4), inset 0 1px 0 rgba(255,255,255,.06)}
+.stage-fixture-mount{position:absolute;top:6px;width:1px;height:34px;transform-origin:top center}
+.fixture-bracket{position:absolute;top:0;left:-1.5px;width:3px;height:9px;background:var(--ink-500)}
+.stage-fixture-sway{position:absolute;top:9px;left:0;width:1px;height:100%;transform-origin:top center;animation:fixtureSway 5.5s ease-in-out infinite}
+.fixture-can{position:absolute;top:0;left:-10px;width:20px;height:18px;
+  clip-path:polygon(28% 0%, 72% 0%, 100% 100%, 0% 100%);
+  background:linear-gradient(180deg, var(--ink-600), var(--ink-900));
+  border-bottom:2px solid var(--gold-500)}
+.fixture-glow{position:absolute;top:16px;left:-6px;width:12px;height:6px;border-radius:50%;
+  background:radial-gradient(circle, #FFF7D6 0%, var(--gold-400) 60%, transparent 78%);
+  box-shadow:0 0 14px 3px rgba(236,203,121,.6);animation:lampPulse 2.6s ease-in-out infinite}
+.fixture-beam{position:absolute;top:18px;left:-42px;width:84px;height:78px;
+  background:linear-gradient(180deg, rgba(255,246,214,.5) 0%, rgba(255,246,214,.15) 45%, transparent 85%);
+  clip-path:polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%); filter:blur(2px)}
+@keyframes fixtureSway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes lampPulse{0%,100%{opacity:.85}50%{opacity:1}}
+@media (prefers-reduced-motion: reduce){.stage-fixture-sway{animation:none}.fixture-glow{animation:none}}
 @media (max-width:1000px){
   .hero-grid{grid-template-columns:1fr}
   .grid-4{grid-template-columns:repeat(2,1fr)}

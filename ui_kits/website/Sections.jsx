@@ -1,4 +1,4 @@
-/* About · Programs · Why Lasya */
+/* About · Programs · Why Madhu Dance Academy */
 
 function About() {
   return (
@@ -6,16 +6,16 @@ function About() {
       <div className="wrap split-grid about-grid">
         <div className="reveal" style={{ position: 'relative' }}>
           <div className="about-photo">
-            <Photo src="assets/photos/lasya-group-photo.jpg" alt="Lasya students and instructor together on stage" radius={24} pos="center center" />
+            <Photo src="assets/photos/madhu-group-photo.jpg" alt="Madhu Dance Academy students and instructor together on stage" radius={24} pos="center center" />
           </div>
         </div>
         <div>
-          <div className="reveal"><Eyebrow>About Lasya</Eyebrow></div>
+          <div className="reveal"><Eyebrow>About Madhu Dance Academy</Eyebrow></div>
           <h2 className="reveal reveal-d1" style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 'clamp(34px,4.4vw,60px)', lineHeight: 1.04, marginTop: 18 }}>
-            More than steps —<br /><span style={{ fontStyle: 'italic' }}>it's expression.</span>
+            From First Steps<br /><span style={{ fontStyle: 'italic' }}>to Stage Lights.</span>
           </h2>
           <p className="reveal reveal-d2" style={{ fontSize: 18, lineHeight: 1.7, color: 'var(--fg-2)', marginTop: 22, maxWidth: 520 }}>
-            At Lasya, every class is a stage. We blend the joy of Bollywood with real technique — building confidence, fitness, cultural connection, and the kind of stage presence that stays with you long after the music stops.
+            Every dancer's journey begins with a single step. At Madhu Dance Academy, children, teens, and adults build confidence, learn exciting Bollywood choreography, make new friends, and grow into performers who shine on stage.
           </p>
           <div className="reveal reveal-d2" style={{ marginTop: 26 }}>
             <a href="about.html"><Button variant="secondary" icon="arrow-right">Read more about us</Button></a>
@@ -27,25 +27,27 @@ function About() {
 }
 
 const programs = [
-  { t: 'Kids Bollywood', s: 'Ages 5–11', d: 'Playful choreography, rhythm games, and big-smile expression for our youngest stars.', c: 'var(--teal-500)', ic: 'baby' },
-  { t: 'Teen Dance', s: 'Ages 12–17', d: 'High-energy routines, formations, and performance craft that build real confidence.', c: 'var(--emerald-500)', ic: 'zap' },
-  { t: 'Adult Bollywood Fitness', s: 'All levels', d: 'Sweat, smile, and learn — a joyful workout set to the songs you love.', c: 'var(--magenta-500)', ic: 'heart-pulse' },
-  { t: 'Wedding & Event', s: 'Choreography', d: 'Custom sangeet and event choreography that gets every guest on the floor.', c: 'var(--royal-500)', ic: 'party-popper' },
+  { t: 'Kids Bollywood', s: 'Ages 5–11', d: 'A joyful introduction to Bollywood dance through energetic music, exciting choreography, and a welcoming environment where kids learn, laugh, and grow together.', c: 'var(--teal-500)', ic: 'baby' },
+  { t: 'Teen Dance', s: 'Ages 12–17', d: 'Build confidence, sharpen your technique, make new friends, and take your performance to the next level with high-energy Bollywood dance.', c: 'var(--emerald-500)', ic: 'zap' },
+  { t: 'Adult Bollywood Fitness', s: 'Adults', d: 'Take a break from the everyday hustle, get moving, and enjoy a high-energy Bollywood workout that leaves you smiling long after class ends.', c: 'var(--magenta-500)', ic: 'heart-pulse' },
+  { t: 'Wedding & Event', s: 'Choreography', d: 'Personalized choreography that brings family and friends together, creating performances everyone will remember long after the celebration ends.', c: 'var(--royal-500)', ic: 'party-popper' },
 ];
 
 function ProgramCard({ p, i, onJoin }) {
   return (
-    <article className={`lift reveal reveal-d${(i % 3) + 1}`} style={{ background: 'var(--surface-1)', border: '1px solid var(--hairline)', borderRadius: 'var(--r-lg)', padding: 26, boxShadow: 'var(--shadow-md)' }}>
+    <article className={`lift reveal reveal-d${(i % 3) + 1}`} style={{ background: 'var(--surface-1)', border: '1px solid var(--hairline)', borderRadius: 'var(--r-lg)', padding: 26, boxShadow: 'var(--shadow-md)', display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div style={{ width: 52, height: 52, borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', background: `color-mix(in srgb, ${p.c} 16%, transparent)`, border: `1px solid color-mix(in srgb, ${p.c} 45%, transparent)`, color: p.c, fontSize: 27 }}>
         <Icon name={p.ic} size={26} color={p.c} />
       </div>
       <div style={{ fontSize: 12.5, color: 'var(--fg-3)', marginTop: 18, letterSpacing: '.04em', textTransform: 'uppercase' }}>{p.s}</div>
       <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 28, marginTop: 4 }}>{p.t}</h3>
       <p style={{ fontSize: 14.5, lineHeight: 1.6, color: 'var(--fg-2)', marginTop: 10, textWrap: 'pretty' }}>{p.d}</p>
-      <div style={{ marginTop: 18, height: 3, borderRadius: 3, background: `linear-gradient(90deg, ${p.c}, transparent)` }} />
-      <button onClick={() => onJoin(p.t)} style={{ display: 'inline-flex', alignItems: 'center', gap: 7, marginTop: 18, fontSize: 14, color: 'var(--gold-400)', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' }}>
-        Enroll <Icon name="arrow-right" size={15} />
-      </button>
+      <div style={{ marginTop: 'auto', paddingTop: 18 }}>
+        <div style={{ height: 3, borderRadius: 3, background: `linear-gradient(90deg, ${p.c}, transparent)` }} />
+        <button onClick={() => onJoin(p.t)} style={{ display: 'inline-flex', alignItems: 'center', gap: 7, marginTop: 18, fontSize: 14, color: 'var(--gold-400)', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' }}>
+          Enroll <Icon name="arrow-right" size={15} />
+        </button>
+      </div>
     </article>
   );
 }
@@ -70,21 +72,19 @@ function Programs({ onJoin }) {
 }
 
 const reasons = [
-  { ic: 'drama', t: 'Expression & storytelling', d: 'Learn to dance with emotion, confidence, and presence—not just memorize steps.' },
-  { ic: 'users', t: 'Teamwork & friendships', d: 'Grow alongside a supportive community that celebrates every achievement.' },
-  { ic: 'mic-vocal', t: 'Real stage experience', d: 'Perform at showcases, cultural events, and recitals that create lasting memories.' },
-  { ic: 'medal', t: 'Confidence beyond dance', d: 'Build poise, discipline, and self-belief that extends far beyond the stage.' },
+  { ic: 'sparkles', t: 'Confidence That Lasts', d: 'Every class helps students become more confident, expressive, and comfortable performing—on stage and in everyday life.' },
+  { ic: 'users', t: 'New Friends, Lasting Memories', d: 'Dance is better together. Students build meaningful friendships while learning, laughing, and celebrating every milestone as a team.' },
+  { ic: 'drama', t: 'Performance Opportunities', d: 'From recitals to cultural events and community showcases, students gain real stage experience in a fun and encouraging environment.' },
+  { ic: 'heart', t: 'A Place to Belong', d: 'More than a studio, Madhu Dance Academy is a welcoming community where every dancer feels supported, encouraged, and inspired to be their best.' },
 ];
 
-function WhyLasya() {
+function WhyMadhu() {
   return (
     <section className="section sec-why">
       <div className="wrap">
         <div className="reveal" style={{ textAlign: 'center', maxWidth: 640, margin: '0 auto' }}>
-          <Eyebrow style={{ justifyContent: 'center' }}>Why Students Love Lasya</Eyebrow>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 'clamp(32px,4vw,54px)', marginTop: 16 }}>More than dance lessons.<br></br>
-A place to grow, perform,
-and belong.</h2>
+          <Eyebrow style={{ justifyContent: 'center' }}>Why Families Love Madhu Dance Academy</Eyebrow>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 'clamp(32px,4vw,54px)', marginTop: 16 }}>More than dance lessons.<br />A place to learn, grow, and shine.</h2>
         </div>
         <div className="grid-4" style={{ marginTop: 54 }}>
           {reasons.map((r, i) => (
@@ -102,4 +102,4 @@ and belong.</h2>
   );
 }
 
-Object.assign(window, { About, Programs, WhyLasya });
+Object.assign(window, { About, Programs, WhyMadhu });

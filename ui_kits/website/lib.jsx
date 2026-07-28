@@ -1,4 +1,4 @@
-/* Shared hooks + atoms for the Lasya site kit */
+/* Shared hooks + atoms for the Madhu Dance Academy site kit */
 const { useState, useEffect, useRef, useCallback } = React;
 
 /* Reveal-on-scroll: add `reveal` (+ optional delay class) to any element,
@@ -197,7 +197,7 @@ function FAQChat() {
         <div className="faq-panel" ref={panelRef} role="dialog" aria-modal="true" aria-label="Frequently asked questions">
           <div className="faq-header">
             <div>
-              <div style={{ fontFamily: 'var(--font-display)', fontSize: 18, color: 'var(--fg-1)' }}>Ask Lasya</div>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: 18, color: 'var(--fg-1)' }}>Ask Madhu Dance Academy</div>
               <div style={{ fontSize: 12, color: 'var(--fg-3)', marginTop: 2 }}>Pick a question below</div>
             </div>
             <button className="faq-close" onClick={() => { setOpen(false); setActive(null); }} aria-label="Close">
@@ -205,7 +205,7 @@ function FAQChat() {
             </button>
           </div>
           <div className="faq-body">
-            <div className="faq-bot-bubble">Hi! I'm here to help. What would you like to know about Lasya? 👋</div>
+            <div className="faq-bot-bubble">Hi! I'm here to help. What would you like to know about Madhu Dance Academy? 👋</div>
             {FAQ_ITEMS.map((item, i) => (
               <div key={i} className="faq-item">
                 <button className={`faq-q${active === i ? ' active' : ''}`} onClick={() => setActive(active === i ? null : i)}>
