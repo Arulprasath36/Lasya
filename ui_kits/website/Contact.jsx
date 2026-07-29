@@ -210,10 +210,10 @@ function Footer({ onContact, onJoin }) {
           </a>
           <div style={{ display: 'flex', gap: 12, marginTop: 20 }}>
             {[
-              { name: 'Instagram', src: 'assets/icon-instagram.png' },
-              { name: 'Facebook', src: 'assets/icon-facebook.png' },
-            ].map(({ name, src }) => (
-              <a key={name} href="#" aria-label={name} style={{ width: 40, height: 40, borderRadius: '50%', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              { name: 'Instagram', src: 'assets/icon-instagram.png', href: 'https://www.instagram.com/madhudanceacademypa' },
+              { name: 'Facebook', src: 'assets/icon-facebook.png', href: '#' },
+            ].map(({ name, src, href }) => (
+              <a key={name} href={href} target="_blank" rel="noopener noreferrer" aria-label={name} style={{ width: 40, height: 40, borderRadius: '50%', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <img src={src} alt={name} style={{ width: '100%', height: '100%' }} />
               </a>
             ))}

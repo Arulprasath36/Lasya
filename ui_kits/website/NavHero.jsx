@@ -114,6 +114,9 @@ const heroShots = [
   { src: 'girl-checkered', pos: 'center bottom', alt: 'Dancer in a checkered costume' },
   { src: 'girl-blue-smile', pos: 'center 22%', alt: 'Young dancer smiling on stage in a blue lehenga' },
   { src: 'boy-white-shirt', pos: 'center bottom', alt: 'Young dancer in a white shirt performing on stage' },
+  { src: 'girl-yellow-stick', pos: 'center 20%', alt: 'Young dancer in a yellow and blue costume holding a prop across her shoulders' },
+  { src: 'boy-white-shirt-kick', pos: '42% 35%', alt: 'Young dancer mid-kick in a dynamic pose' },
+  { src: 'boy-red-jacket-sit', pos: 'center 30%', alt: 'Young dancer in a red jacket striking a floor pose' },
 ];
 
 function HeroSlideshow({ interval = 4200 }) {
