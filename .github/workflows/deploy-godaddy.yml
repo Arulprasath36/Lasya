@@ -1,0 +1,37 @@
+name: Deploy to GoDaddy
+
+# Runs on every push to main that touches the deployable site folder,
+# and can also be triggered manually from the Actions tab.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'ui_kits/website/**'
+      - '.github/workflows/deploy-godaddy.yml'
+  workflow_dispatch:
+
+jobs:
+  ftp-deploy:
+    name: Upload ui_kits/website to public_html
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Deploy over FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.GODADDY_FTP_SERVER }}
+          username: ${{ secrets.GODADDY_FTP_USERNAME }}
+          password: ${{ secrets.GODADDY_FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          # Only the deployable static site — not the whole design-system repo.
+          local-dir: ui_kits/website/
+          # GoDaddy's web root for the primary domain. If the site should live
+          # in a subfolder or on an addon domain, change this (see README note
+          # in this workflow file for details).
+          server-dir: public_html/
+          exclude: |
+            **/README.md
+            **/.DS_Store

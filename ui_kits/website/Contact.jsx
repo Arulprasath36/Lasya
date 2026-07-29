@@ -130,7 +130,7 @@ function ContactModal({ open, onClose }) {
             <div>
               <Eyebrow>Get in touch</Eyebrow>
               <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 32, marginTop: 12 }}>Contact Us</h3>
-              <a href="https://www.google.com/maps/search/?api=1&query=104+Schubert+Dr+Suite+B+Downingtown+PA" target="_blank" rel="noopener noreferrer" className="nav-link" style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginTop: 12, color: 'var(--gold-400)', fontSize: 14 }}>
+              <a href="https://maps.app.goo.gl/mbDFceyWnrHENiw46" target="_blank" rel="noopener noreferrer" className="nav-link" style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginTop: 12, color: 'var(--gold-400)', fontSize: 14 }}>
                 <Icon name="map-pin" size={16} style={{ marginTop: 2, flexShrink: 0 }} />
                 <span style={{ textDecoration: 'underline', textUnderlineOffset: 3, textDecorationColor: 'rgba(236,203,121,.45)' }}>104 Schubert Dr (Suite B), Downingtown, PA</span>
               </a>
@@ -204,7 +204,7 @@ function Footer({ onContact, onJoin }) {
             <img src="assets/logo-madhu.png" style={{ height: 170 }} alt="Madhu Dance Academy — Bollywood Dance School" />
           </div>
           <p style={{ color: 'var(--fg-2)', fontSize: 14.5, marginTop: 16, maxWidth: 320, lineHeight: 1.6 }}>From First Steps to Stage Lights. A Bollywood dance school for kids, teens, and adults.</p>
-          <a href="https://www.google.com/maps/search/?api=1&query=104+Schubert+Dr+Suite+B+Downingtown+PA" target="_blank" rel="noopener noreferrer" className="nav-link" style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginTop: 18, color: 'var(--gold-400)', fontSize: 14 }}>
+          <a href="https://maps.app.goo.gl/mbDFceyWnrHENiw46" target="_blank" rel="noopener noreferrer" className="nav-link" style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginTop: 18, color: 'var(--gold-400)', fontSize: 14 }}>
             <Icon name="map-pin" size={16} style={{ marginTop: 2, flexShrink: 0 }} />
             <span style={{ textDecoration: 'underline', textUnderlineOffset: 3, textDecorationColor: 'rgba(236,203,121,.45)' }}>104 Schubert Dr (Suite B)<br />Downingtown, PA</span>
           </a>
