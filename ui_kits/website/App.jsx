@@ -42,7 +42,7 @@ function App() {
       <Footer onContact={() => setContactModal(true)} onJoin={join} />
       <RegisterModal open={modal} onClose={() => setModal(false)} initialProgram={selectedProgram} />
       <ContactModal open={contactModal} onClose={() => setContactModal(false)} />
-      <FAQChat />
+      {/* FAQ chat is temporarily hidden. Restore by rendering <FAQChat /> here. */}
 
       <TweaksPanel>
         <TweakSection label="Background mood" />
