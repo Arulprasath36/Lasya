@@ -12,8 +12,36 @@ const fieldStyle = { width: '100%', background: 'var(--surface-1)', border: '1px
 
 const FORM_ENDPOINT = 'https://formsubmit.co/ajax/lasyadancefitness@gmail.com';
 
+async function submitForm(fields) {
+  const res = await fetch(FORM_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      ...fields,
+      _url: window.location.href.split('#')[0],
+      _template: 'table',
+    }),
+  });
+
+  let data = null;
+  try {
+    data = await res.json();
+  } catch {
+    // Preserve the HTTP status below when the service returns a non-JSON error.
+  }
+
+  if (!res.ok || data?.success === false) {
+    const detail = data?.message || `FormSubmit returned HTTP ${res.status}.`;
+    console.error('FormSubmit submission failed:', { status: res.status, data });
+    throw new Error(detail);
+  }
+
+  return data;
+}
+
 function RegisterModal({ open, onClose, initialProgram = 'Kids Bollywood' }) {
   const [status, setStatus] = useState('idle'); // idle | submitting | done | error
+  const [errorMessage, setErrorMessage] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [mobile, setMobile] = useState('');
@@ -21,30 +49,35 @@ function RegisterModal({ open, onClose, initialProgram = 'Kids Bollywood' }) {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    if (open) { setStatus('idle'); setName(''); setEmail(''); setMobile(''); setProgram(initialProgram); setMessage(''); }
+    if (open) { setStatus('idle'); setErrorMessage(''); setName(''); setEmail(''); setMobile(''); setProgram(initialProgram); setMessage(''); }
   }, [open, initialProgram]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('submitting');
+    setErrorMessage('');
     try {
-      const res = await fetch(FORM_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, mobile, program, message }),
+      await submitForm({
+        name,
+        email,
+        mobile,
+        program,
+        message,
+        _subject: `New ${program} registration from Madhu Dance Academy website`,
       });
-      setStatus(res.ok ? 'done' : 'error');
-    } catch {
+      setStatus('done');
+    } catch (error) {
+      setErrorMessage(error.message);
       setStatus('error');
     }
   };
 
   if (!open) return null;
   return (
-    <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(4,5,9,.72)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
-      <div onClick={(e) => e.stopPropagation()} style={{ width: 'min(520px,100%)', background: 'var(--ink-700)', border: '1px solid var(--hairline)', borderRadius: 'var(--r-lg)', boxShadow: 'var(--shadow-lg)', overflow: 'hidden' }}>
+    <div className="modal-overlay" onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(4,5,9,.72)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+      <div className="modal-card" onClick={(e) => e.stopPropagation()} style={{ width: 'min(520px,100%)', background: 'var(--ink-700)', border: '1px solid var(--hairline)', borderRadius: 'var(--r-lg)', boxShadow: 'var(--shadow-lg)', overflow: 'hidden' }}>
         <div style={{ height: 4, background: 'var(--grad-peacock)' }} />
-        <div style={{ padding: 32 }}>
+        <div className="modal-body" style={{ padding: 32 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div>
               <Eyebrow>Register</Eyebrow>
@@ -56,8 +89,8 @@ function RegisterModal({ open, onClose, initialProgram = 'Kids Bollywood' }) {
           {status === 'done' ? (
             <div style={{ textAlign: 'center', padding: '28px 0 8px' }}>
               <div style={{ width: 60, height: 60, margin: '0 auto', borderRadius: '50%', background: 'color-mix(in srgb, var(--emerald-500) 18%, transparent)', border: '1px solid var(--emerald-500)', color: 'var(--emerald-400)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icon name="check" size={30} /></div>
-              <h4 style={{ fontFamily: 'var(--font-display)', fontSize: 26, marginTop: 18 }}>See you on the floor!</h4>
-              <p style={{ color: 'var(--fg-2)', fontSize: 15, marginTop: 8 }}>We'll email you class times shortly.</p>
+              <h4 style={{ fontFamily: 'var(--font-display)', fontSize: 26, marginTop: 18 }}>Registration received!</h4>
+              <p style={{ color: 'var(--fg-2)', fontSize: 15, marginTop: 8 }}>Thank you! We will get back to you within 24 hours.</p>
               <div style={{ marginTop: 22 }}><Button onClick={onClose}>Done</Button></div>
             </div>
           ) : (
@@ -68,7 +101,7 @@ function RegisterModal({ open, onClose, initialProgram = 'Kids Bollywood' }) {
               <Field label="Email *">
                 <input type="email" style={fieldStyle} placeholder="you@email.com" required value={email} onChange={e => setEmail(e.target.value)} />
               </Field>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+              <div className="form-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
                 <Field label="Mobile number">
                   <input type="tel" style={fieldStyle} placeholder="98765 43210" value={mobile} onChange={e => setMobile(e.target.value)} pattern="[\d\s\+\(\)\-]{10,15}" title="Please enter a valid phone number (10–15 digits)" />
                 </Field>
@@ -82,7 +115,9 @@ function RegisterModal({ open, onClose, initialProgram = 'Kids Bollywood' }) {
                 <textarea style={{ ...fieldStyle, resize: 'vertical', minHeight: 90 }} placeholder="Any questions or details you'd like to share… (optional)" value={message} onChange={e => setMessage(e.target.value)} rows={3} />
               </Field>
               {status === 'error' && (
-                <p style={{ fontSize: 13, color: 'var(--magenta-400)', margin: 0 }}>Something went wrong — please try again or email us directly.</p>
+                <p role="alert" style={{ fontSize: 13, color: 'var(--magenta-400)', margin: 0 }}>
+                  Unable to send: {errorMessage || 'Please try again or email us directly.'}
+                </p>
               )}
               <Button type="submit" icon={status === 'submitting' ? 'loader' : 'sparkles'} style={{ justifyContent: 'center', marginTop: 6 }} disabled={status === 'submitting'}>
                 {status === 'submitting' ? 'Sending…' : 'Register Now'}
@@ -97,35 +132,34 @@ function RegisterModal({ open, onClose, initialProgram = 'Kids Bollywood' }) {
 
 function ContactModal({ open, onClose }) {
   const [status, setStatus] = useState('idle');
+  const [errorMessage, setErrorMessage] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    if (open) { setStatus('idle'); setName(''); setEmail(''); setMessage(''); }
+    if (open) { setStatus('idle'); setErrorMessage(''); setName(''); setEmail(''); setMessage(''); }
   }, [open]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('submitting');
+    setErrorMessage('');
     try {
-      const res = await fetch(FORM_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message, _subject: 'New message from Madhu Dance Academy website' }),
-      });
-      setStatus(res.ok ? 'done' : 'error');
-    } catch {
+      await submitForm({ name, email, message, _subject: 'New message from Madhu Dance Academy website' });
+      setStatus('done');
+    } catch (error) {
+      setErrorMessage(error.message);
       setStatus('error');
     }
   };
 
   if (!open) return null;
   return (
-    <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(4,5,9,.72)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
-      <div onClick={(e) => e.stopPropagation()} style={{ width: 'min(480px,100%)', background: 'var(--ink-700)', border: '1px solid var(--hairline)', borderRadius: 'var(--r-lg)', boxShadow: 'var(--shadow-lg)', overflow: 'hidden' }}>
+    <div className="modal-overlay" onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(4,5,9,.72)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+      <div className="modal-card" onClick={(e) => e.stopPropagation()} style={{ width: 'min(480px,100%)', background: 'var(--ink-700)', border: '1px solid var(--hairline)', borderRadius: 'var(--r-lg)', boxShadow: 'var(--shadow-lg)', overflow: 'hidden' }}>
         <div style={{ height: 4, background: 'var(--grad-peacock)' }} />
-        <div style={{ padding: 32 }}>
+        <div className="modal-body" style={{ padding: 32 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div>
               <Eyebrow>Get in touch</Eyebrow>
@@ -157,7 +191,9 @@ function ContactModal({ open, onClose }) {
                 <textarea style={{ ...fieldStyle, resize: 'vertical', minHeight: 110 }} placeholder="How can we help you?" required value={message} onChange={e => setMessage(e.target.value)} rows={4} />
               </Field>
               {status === 'error' && (
-                <p style={{ fontSize: 13, color: 'var(--magenta-400)', margin: 0 }}>Something went wrong — please try again or email us directly.</p>
+                <p role="alert" style={{ fontSize: 13, color: 'var(--magenta-400)', margin: 0 }}>
+                  Unable to send: {errorMessage || 'Please try again or email us directly.'}
+                </p>
               )}
               <Button type="submit" icon={status === 'submitting' ? 'loader' : 'send'} style={{ justifyContent: 'center', marginTop: 6 }} disabled={status === 'submitting'}>
                 {status === 'submitting' ? 'Sending…' : 'Send Message'}

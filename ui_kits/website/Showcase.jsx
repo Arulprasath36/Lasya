@@ -99,7 +99,11 @@ function Testimonials() {
 
   useEffect(() => {
     const measure = () => {
-      if (containerRef.current) setCardW(containerRef.current.offsetWidth - PEEK * 2);
+      if (containerRef.current) {
+        const width = containerRef.current.offsetWidth;
+        const peek = width < 600 ? 0 : PEEK;
+        setCardW(width - peek * 2);
+      }
     };
     measure();
     window.addEventListener('resize', measure);
@@ -112,7 +116,8 @@ function Testimonials() {
   }, [total]);
 
   const goTo = (next) => setIdx((next + total) % total);
-  const offset = PEEK - idx * (cardW + GAP);
+  const peek = containerRef.current?.offsetWidth < 600 ? 0 : PEEK;
+  const offset = peek - idx * (cardW + GAP);
 
   return (
     <section className="section sec-testimonials">
@@ -132,6 +137,7 @@ function Testimonials() {
               <figure
                 key={q.n}
                 onClick={() => i !== idx && goTo(i)}
+                className="testimonial-card"
                 style={{
                   flex: `0 0 ${cardW}px`,
                   background: 'var(--surface-1)',

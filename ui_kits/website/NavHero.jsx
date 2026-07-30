@@ -59,7 +59,7 @@ function Hero({ onJoin, slideshow = true }) {
       <div className="wrap hero-grid" style={{ position: 'relative', zIndex: 2 }}>
         <div>
           <div className="reveal in"><Eyebrow>Bollywood Dance School</Eyebrow></div>
-          <h1 className="reveal reveal-d1" style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: 'clamp(46px,4.2vw,76px)', lineHeight: 1.04, letterSpacing: '-.015em', marginTop: 22 }}>
+          <h1 className="hero-title reveal reveal-d1" style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: 'clamp(46px,4.2vw,76px)', lineHeight: 1.04, letterSpacing: '-.015em', marginTop: 22 }}>
             <span style={{ display: 'block', whiteSpace: 'nowrap' }}>
               Move with <span style={{ color: 'var(--teal-400)' }}>Grace</span>
             </span>
@@ -77,11 +77,7 @@ creativity, and unforgettable performances.
             <Button onClick={onJoin} icon="sparkles">Join a Class</Button>
             <a href="#programs"><Button variant="secondary">View Programs</Button></a>
           </div>
-          <div className="reveal reveal-d3" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '10px 14px', borderRadius: 'var(--r-pill)', background: 'rgba(8,9,13,.48)', border: '1px solid var(--hairline)', marginTop: 18 }}>
-            <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--teal-400)', boxShadow: '0 0 10px var(--teal-400)' }} />
-            <span style={{ fontSize: 13, color: 'var(--fg-2)' }}>Now enrolling — Summer batch</span>
-          </div>
-          <div className="reveal reveal-d4" style={{ display: 'flex', gap: 30, marginTop: 44 }}>
+          <div className="hero-stats reveal reveal-d4" style={{ display: 'flex', gap: 30, marginTop: 44 }}>
             {[['12+', 'Years teaching'], ['600+', 'Students on stage'], ['4', 'Programs']].map(([n, l]) => (
               <div key={l}>
                 <div style={{ fontFamily: 'var(--font-display)', fontSize: 38, fontWeight: 600, color: 'var(--fg-1)' }}>{n}</div>

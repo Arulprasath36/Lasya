@@ -6,12 +6,17 @@ const MADHU_TWEAKS = /*EDITMODE-BEGIN*/{
 }/*EDITMODE-END*/;
 
 function App() {
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(() => new URLSearchParams(window.location.search).get('register') === '1');
   const [selectedProgram, setSelectedProgram] = useState('Kids Bollywood');
   const [contactModal, setContactModal] = useState(false);
   const [t, setTweak] = useTweaks(MADHU_TWEAKS);
   useReveal();
-  const join = useCallback((program) => { if (program) setSelectedProgram(program); setModal(true); }, []);
+  const join = useCallback((program) => {
+    // Buttons that use `onClick={join}` pass a React click event here. Only
+    // program cards intentionally pass a program-name string.
+    if (typeof program === 'string') setSelectedProgram(program);
+    setModal(true);
+  }, []);
 
   // apply background mood + accent to the document
   useEffect(() => {

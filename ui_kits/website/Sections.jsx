@@ -27,10 +27,10 @@ function About() {
 }
 
 const programs = [
-  { t: 'Kids Bollywood', s: 'Ages 5–11', d: 'A joyful introduction to Bollywood dance through energetic music, exciting choreography, and a welcoming environment where kids learn, laugh, and grow together.', c: 'var(--teal-500)', ic: 'baby' },
-  { t: 'Teen Dance', s: 'Ages 12–17', d: 'Build confidence, sharpen your technique, make new friends, and take your performance to the next level with high-energy Bollywood dance.', c: 'var(--emerald-500)', ic: 'zap' },
-  { t: 'Adult Bollywood Fitness', s: 'Adults', d: 'Take a break from the everyday hustle, get moving, and enjoy a high-energy Bollywood workout that leaves you smiling long after class ends.', c: 'var(--magenta-500)', ic: 'heart-pulse' },
-  { t: 'Wedding & Event', s: 'Choreography', d: 'Personalized choreography that brings family and friends together, creating performances everyone will remember long after the celebration ends.', c: 'var(--royal-500)', ic: 'party-popper' },
+  { t: 'Kids Bollywood', d: 'A joyful introduction to Bollywood dance through energetic music, exciting choreography, and a welcoming environment where kids learn, laugh, and grow together.', c: 'var(--teal-500)', ic: 'baby' },
+  { t: 'Teen Dance', d: 'Build confidence, sharpen your technique, make new friends, and take your performance to the next level with high-energy Bollywood dance.', c: 'var(--emerald-500)', ic: 'zap' },
+  { t: 'Adult Bollywood Fitness', d: 'Take a break from the everyday hustle, get moving, and enjoy a high-energy Bollywood workout that leaves you smiling long after class ends.', c: 'var(--magenta-500)', ic: 'heart-pulse' },
+  { t: 'Wedding & Event', d: 'Personalized choreography that brings family and friends together, creating performances everyone will remember long after the celebration ends.', c: 'var(--royal-500)', ic: 'party-popper' },
 ];
 
 function ProgramCard({ p, i, onJoin }) {
@@ -39,8 +39,7 @@ function ProgramCard({ p, i, onJoin }) {
       <div style={{ width: 52, height: 52, borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', background: `color-mix(in srgb, ${p.c} 16%, transparent)`, border: `1px solid color-mix(in srgb, ${p.c} 45%, transparent)`, color: p.c, fontSize: 27 }}>
         <Icon name={p.ic} size={26} color={p.c} />
       </div>
-      <div style={{ fontSize: 12.5, color: 'var(--fg-3)', marginTop: 18, letterSpacing: '.04em', textTransform: 'uppercase' }}>{p.s}</div>
-      <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 28, marginTop: 4 }}>{p.t}</h3>
+      <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 28, marginTop: 18 }}>{p.t}</h3>
       <p style={{ fontSize: 14.5, lineHeight: 1.6, color: 'var(--fg-2)', marginTop: 10, textWrap: 'pretty' }}>{p.d}</p>
       <div style={{ marginTop: 'auto', paddingTop: 18 }}>
         <div style={{ height: 3, borderRadius: 3, background: `linear-gradient(90deg, ${p.c}, transparent)` }} />

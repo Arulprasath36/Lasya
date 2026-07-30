@@ -258,6 +258,30 @@ html[data-mood="vibrant"] #contact{
   .section{padding:80px 0}
   .wrap{padding:0 22px}
   .hide-sm{display:none!important}
+  .about-grid{max-width:none}
+  .about-photo{height:auto;aspect-ratio:4/3}
+  .hero-title{font-size:clamp(38px,12vw,54px)!important}
+  .hero-title span{white-space:normal!important}
+  .hero-stats{gap:18px!important;justify-content:space-between}
+  .hero-stats>div{min-width:0}
+  .hero-stats>div>div:first-child{font-size:32px!important}
+  .h-scroll{padding-left:22px;padding-right:22px}
+  .h-scroll>div{width:min(82vw,360px)!important;height:min(122vw,520px)!important}
+  .testimonial-card{padding:28px 24px!important}
+  .modal-overlay{align-items:flex-start!important;padding:12px!important;overflow-y:auto}
+  .modal-card{margin:auto 0;max-height:calc(100dvh - 24px);overflow-y:auto!important}
+  .modal-body{padding:24px 20px!important}
+  .form-two-col{grid-template-columns:1fr!important}
+  .founder-portrait{float:none!important;width:100%!important;max-width:430px;margin:0 0 32px!important}
+  .faq-widget{right:14px;bottom:14px}
+  .faq-panel{width:min(320px,calc(100vw - 28px));max-height:min(480px,calc(100dvh - 96px))}
+}
+@media (max-width:520px){
+  .grid-4{grid-template-columns:1fr}
+  .nav .wrap{padding-left:16px;padding-right:16px}
+  .nav img{height:64px!important}
+  .nav .btn{padding:9px 15px!important;font-size:13px!important}
+  .footer-grid{padding-left:22px!important;padding-right:22px!important}
 }
 
 /* ---- FAQ chat widget ---- */
