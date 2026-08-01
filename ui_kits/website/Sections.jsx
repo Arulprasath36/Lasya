@@ -6,7 +6,7 @@ function About() {
       <div className="wrap split-grid about-grid">
         <div className="reveal" style={{ position: 'relative' }}>
           <div className="about-photo">
-            <Photo src="assets/photos/madhu-group-photo.jpg" alt="Madhu Dance Academy students and instructor together on stage" radius={24} pos="center center" />
+            <Photo src="assets/photos/madhu-group-photo-web.jpg" alt="Madhu Dance Academy students and instructor together on stage" radius={24} pos="center center" />
           </div>
         </div>
         <div>

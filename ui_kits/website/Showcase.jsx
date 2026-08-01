@@ -6,12 +6,12 @@ const galleryItems = [
   { src: 'silhouette-moon-web.jpg', w: 440, label: 'Moonlight', pos: 'center 28%' },
   { src: 'girl-blue-smile-web.jpg', w: 440, label: 'Pure Joy', pos: 'center 20%' },
   { src: 'boy-white-shirt-web.jpg', w: 440, label: 'Showstoppers' },
-  { src: 'ANU07538.jpg', w: 440, label: 'On Stage' },
-  { src: 'DSC_2004-2.jpg', w: 440, label: 'Spotlight' },
-  { src: 'ANU05856.jpg', w: 440, label: 'Performance' },
-  { src: 'ANU06835.jpg', w: 440, label: 'In the Moment' },
-  { src: 'ANU07161.jpg', w: 440, label: 'Stage Presence' },
-  { src: 'DSC_3043.jpg', w: 440, label: 'The Ensemble' },
+  { src: 'ANU07538-web.jpg', w: 440, label: 'On Stage' },
+  { src: 'DSC_2004-2-web.jpg', w: 440, label: 'Spotlight' },
+  { src: 'ANU05856-web.jpg', w: 440, label: 'Performance' },
+  { src: 'ANU06835-web.jpg', w: 440, label: 'In the Moment' },
+  { src: 'ANU07161-web.jpg', w: 440, label: 'Stage Presence' },
+  { src: 'DSC_3043-web.jpg', w: 440, label: 'The Ensemble' },
 ];
 
 function Gallery() {

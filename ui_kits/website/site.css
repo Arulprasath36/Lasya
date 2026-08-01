@@ -18,8 +18,8 @@ button{font-family:inherit}
 /* responsive grids (classes so media queries can override) */
 .hero-grid{max-width:1280px;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:stretch}
 .split-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-.about-grid{max-width:min(1400px,calc(100vw - 80px));grid-template-columns:minmax(0,2fr) minmax(240px,0.75fr);gap:56px;align-items:center}
-.about-photo{width:100%;aspect-ratio:19/10;border-radius:24px;overflow:hidden}
+.about-grid{max-width:1200px;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);gap:clamp(36px,5vw,56px);align-items:center}
+.about-photo{width:100%;max-height:430px;aspect-ratio:16/10;border-radius:24px;overflow:hidden}
 .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .masonry-3{columns:3;column-gap:20px}
@@ -49,6 +49,8 @@ button{font-family:inherit}
 @media (prefers-reduced-motion: reduce){.stage-fixture-sway{animation:none}.fixture-glow{animation:none}}
 @media (max-width:1000px){
   .hero-grid{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr;max-width:760px}
+  .about-photo{max-height:380px}
   .grid-4{grid-template-columns:repeat(2,1fr)}
   .footer-grid{grid-template-columns:1fr 1fr}
 }
@@ -255,11 +257,11 @@ html[data-mood="vibrant"] #contact{
   .hero-aside{display:none!important}
 }
 @media (max-width:760px){
-  .section{padding:80px 0}
-  .wrap{padding:0 22px}
+  .section{padding:68px 0}
+  .wrap{width:100%;padding:0 20px}
   .hide-sm{display:none!important}
   .about-grid{max-width:none}
-  .about-photo{height:auto;aspect-ratio:4/3}
+  .about-photo{height:auto;max-height:280px;aspect-ratio:16/10}
   .hero-title{font-size:clamp(38px,12vw,54px)!important}
   .hero-title span{white-space:normal!important}
   .hero-stats{gap:18px!important;justify-content:space-between}
@@ -273,6 +275,7 @@ html[data-mood="vibrant"] #contact{
   .modal-body{padding:24px 20px!important}
   .form-two-col{grid-template-columns:1fr!important}
   .founder-portrait{float:none!important;width:100%!important;max-width:430px;margin:0 0 32px!important}
+  .btn{max-width:100%;white-space:normal;text-align:center;justify-content:center}
   .faq-widget{right:14px;bottom:14px}
   .faq-panel{width:min(320px,calc(100vw - 28px));max-height:min(480px,calc(100dvh - 96px))}
 }
@@ -281,6 +284,9 @@ html[data-mood="vibrant"] #contact{
   .nav .wrap{padding-left:16px;padding-right:16px}
   .nav img{height:64px!important}
   .nav .btn{padding:9px 15px!important;font-size:13px!important}
+  .hero-stats{flex-wrap:wrap;justify-content:flex-start;column-gap:26px!important;row-gap:16px!important}
+  .eyebrow{font-size:12px;letter-spacing:.22em;gap:10px}
+  .eyebrow::before{width:22px}
   .footer-grid{padding-left:22px!important;padding-right:22px!important}
 }
 

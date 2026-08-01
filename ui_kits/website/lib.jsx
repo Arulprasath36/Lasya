@@ -115,7 +115,7 @@ function CursorEye() {
 /* Cover-fit photo with a subtle warm grade to match the brand */
 function Photo({ src, alt, radius = 24, style, pos = 'center' }) {
   return (
-    <img src={src} alt={alt || ''} loading="lazy" style={{
+    <img src={src} alt={alt || ''} loading="lazy" decoding="async" style={{
       width: '100%', height: '100%', objectFit: 'cover', objectPosition: pos,
       borderRadius: radius, display: 'block', ...style,
     }} />
