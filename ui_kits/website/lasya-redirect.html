@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#08090d">
+<title>Lasya Dance &amp; Fitness is now Madhu Dance Academy</title>
+<link rel="icon" href="assets/photos/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/photos/favicon_io/favicon-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&amp;family=Manrope:wght@300;400;500;600&amp;family=Marcellus&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #08090d;
+    --surface: rgba(20, 22, 33, .78);
+    --fg: #f5efe1;
+    --muted: rgba(245, 239, 225, .72);
+    --gold: #eccb79;
+    --gold-deep: #d8b25a;
+    --teal: #0fa6a0;
+    --magenta: #c42e84;
+    --royal: #2c4bd4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { min-height: 100%; }
+
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+    overflow-x: hidden;
+    padding: 32px 20px;
+    color: var(--fg);
+    background:
+      radial-gradient(70% 65% at 8% 90%, rgba(44, 75, 212, .38), transparent 64%),
+      radial-gradient(70% 65% at 94% 8%, rgba(196, 46, 132, .38), transparent 62%),
+      radial-gradient(55% 50% at 50% 55%, rgba(15, 166, 160, .20), transparent 68%),
+      var(--ink);
+    font-family: "Manrope", sans-serif;
+  }
+
+  .glow {
+    position: fixed;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: rgba(216, 178, 90, .10);
+    filter: blur(90px);
+    pointer-events: none;
+  }
+
+  .glow.one { top: -180px; left: -140px; }
+  .glow.two { right: -160px; bottom: -190px; }
+
+  main {
+    position: relative;
+    z-index: 1;
+    width: min(760px, 100%);
+    padding: clamp(32px, 7vw, 68px);
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid rgba(236, 203, 121, .25);
+    border-radius: 28px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .48);
+    backdrop-filter: blur(18px);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--gold);
+    font-family: "Marcellus", serif;
+    font-size: 12px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow::before,
+  .eyebrow::after {
+    content: "";
+    width: 24px;
+    height: 1px;
+    background: currentColor;
+    opacity: .65;
+  }
+
+  h1 {
+    margin-top: 22px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(42px, 8vw, 76px);
+    font-weight: 600;
+    line-height: .98;
+    text-wrap: balance;
+  }
+
+  .intro {
+    margin: 24px auto 0;
+    max-width: 580px;
+    color: var(--muted);
+    font-size: clamp(16px, 2vw, 19px);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .milestones {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    list-style: none;
+  }
+
+  .milestones li {
+    padding: 10px 16px;
+    color: var(--fg);
+    background: rgba(255, 255, 255, .045);
+    border: 1px solid rgba(255, 255, 255, .10);
+    border-radius: 999px;
+    font-size: 13px;
+  }
+
+  .milestones li::before {
+    content: "✦";
+    margin-right: 8px;
+    color: var(--gold);
+  }
+
+  .new-name {
+    margin-top: 38px;
+    padding-top: 34px;
+    border-top: 1px solid rgba(236, 203, 121, .18);
+  }
+
+  .welcome {
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .academy {
+    display: block;
+    margin-top: 10px;
+    color: var(--gold);
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(40px, 7vw, 66px);
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .promise {
+    margin-top: 20px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(23px, 3.5vw, 31px);
+    line-height: 1.35;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    margin-top: 32px;
+    padding: 13px 26px;
+    color: #18140b;
+    background: linear-gradient(180deg, var(--gold), var(--gold-deep));
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(216, 178, 90, .24);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+
+  .button:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(216, 178, 90, .34); }
+  .button:focus-visible { outline: 3px solid var(--teal); outline-offset: 4px; }
+
+  .redirect-note {
+    margin-top: 16px;
+    color: rgba(245, 239, 225, .48);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 520px) {
+    body { padding: 16px; }
+    main { padding: 34px 20px; border-radius: 22px; }
+    .milestones { display: grid; grid-template-columns: 1fr; }
+    .milestones li { width: 100%; }
+    .button { width: 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .button { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="glow one" aria-hidden="true"></div>
+<div class="glow two" aria-hidden="true"></div>
+
+<main>
+  <div class="eyebrow">A beautiful new chapter</div>
+  <h1>Lasya Dance &amp; Fitness</h1>
+  <p class="intro">Lasya Dance &amp; Fitness has begun a beautiful new chapter.</p>
+
+  <ul class="milestones" aria-label="What is new">
+    <li>New Space</li>
+    <li>New Name</li>
+    <li>New Dreams</li>
+  </ul>
+
+  <div class="new-name">
+    <p class="welcome">We are excited to welcome you to our new home as</p>
+    <span class="academy">Madhu Dance Academy</span>
+    <p class="promise">Same passion for dance.<br>Even bigger dreams for our students and community.</p>
+  </div>
+
+  <a class="button" id="continue-link" href="https://madhudanceacademy.com/">Visit Madhu Dance Academy</a>
+  <p class="redirect-note" id="redirect-note">You will be redirected to our new website in <span id="countdown">8</span> seconds.</p>
+</main>
+
+<script>
+  const MADHU_ACADEMY_URL = 'https://madhudanceacademy.com/';
+  const REDIRECT_DELAY_SECONDS = 8;
+
+  const link = document.getElementById('continue-link');
+  const countdown = document.getElementById('countdown');
+  const redirectNote = document.getElementById('redirect-note');
+  link.href = MADHU_ACADEMY_URL;
+
+  if (MADHU_ACADEMY_URL.includes('YOUR-MADHU-DANCE-ACADEMY-URL')) {
+    link.addEventListener('click', (event) => event.preventDefault());
+    redirectNote.hidden = true;
+  } else {
+    let secondsLeft = REDIRECT_DELAY_SECONDS;
+    const timer = window.setInterval(() => {
+      secondsLeft -= 1;
+      countdown.textContent = secondsLeft;
+
+      if (secondsLeft <= 0) {
+        window.clearInterval(timer);
+        window.location.replace(MADHU_ACADEMY_URL);
+      }
+    }, 1000);
+  }
+</script>
+</body>
+</html>
